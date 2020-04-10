@@ -49,9 +49,9 @@ def parse_tags(tags: str) -> list:
     return [tag for tag in prototypes if tag.startswith("#")]
 
 
-@app.route("/", methods=['GET'])
-def main_page():
-    return app.send_static_file("react-dbform.html")
+# @app.route("/", methods=['GET'])
+# def main_page():
+    # return app.send_static_file("react-dbform.html")
 
 
 @app.route("/populate-db", methods=['POST'])

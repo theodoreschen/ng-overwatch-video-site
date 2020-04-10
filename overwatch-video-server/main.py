@@ -28,14 +28,14 @@ CORS(app)
 DB = None
 
 
-@app.route("/angular-page")
-def angular_page():
-    return app.send_static_file("ng-index.html")
+# @app.route("/angular-page")
+# def angular_page():
+    # return app.send_static_file("ng-index.html")
 
 
-@app.route("/")
-def react_page():
-    return app.send_static_file("react-index.html")
+# @app.route("/")
+# def react_page():
+    # return app.send_static_file("react-index.html")
 
 
 @app.route("/retrieve")
@@ -107,9 +107,9 @@ def populate_db():
         return str(e), 500
 
 
-@app.route("/db-form")
-def db_form_page():
-    return app.send_static_file("react-dbform.html")
+# @app.route("/db-form")
+# def db_form_page():
+    # return app.send_static_file("react-dbform.html")
 
 
 @app.route("/update-db", methods=["post"])

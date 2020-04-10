@@ -44,10 +44,12 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+**/settings.json
 
 # Python
 **/__pycache__/*
 *.pyc
+**/venv/
 
 # Project specific code
 **/video-metadata.json
