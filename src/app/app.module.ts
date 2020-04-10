@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { VideoViewerComponent } from './video-viewer/video-viewer.component';
 import { VideoUpdateComponent } from './video-update/video-update.component';
 import { VideoAddComponent } from './video-add/video-add.component';
+import { VideoSearchComponent } from './video-search/video-search.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { VideoAddComponent } from './video-add/video-add.component';
     VideoViewerComponent,
     VideoUpdateComponent,
     VideoAddComponent,
+    VideoSearchComponent,
   ],
   imports: [
     BrowserModule,

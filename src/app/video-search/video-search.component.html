@@ -1,0 +1,19 @@
+<section>
+  <h1>Video Search</h1>
+  <form>
+    <label>Start Date</label>
+    <input />
+    <label>End Date</label>
+    <input />
+    <label>Hero Name</label>
+    <select>
+      <option *ngFor="let hero of overwatchHeroes">{{hero.name}}</option>
+    </select>
+    <button>Search</button>
+  </form>
+</section>
+<section *ngIf="videoSearchResults.length !== 0">
+  <h1>Search Results</h1>
+  <ul>
+  </ul>
+</section>
