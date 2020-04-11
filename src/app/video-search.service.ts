@@ -26,17 +26,17 @@ export class VideoSearchService {
       .pipe(
         tap((retrievedVideos: VideoMetadata[]) => {
           retrievedVideos.forEach( video => {
-            this.log.DEBUG('getVideosBySearch', `retrieved video URL: ${video.video_url}`);
+            this.log.DEBUG('VideoSearchService.getVideosBySearch', `retrieved video URL: ${video.video_url}`);
           });
         }),
-        catchError(this.handleError<VideoMetadata[]>('getVideosBySearch'))
+        catchError(this.handleError<VideoMetadata[]>('VideoSearchService.getVideosBySearch'))
       );
   };
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error("VideoSearchService", error);
-      this.log.ERROR("VideoSearchService", `${operation} failed with error '${error.message}'`);
+      console.error(error);
+      this.log.ERROR(operation, `Failed with error '${error.message}'`);
       return of(result as T);
     };
   }

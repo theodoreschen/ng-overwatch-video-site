@@ -1,3 +1,26 @@
 <nav>
   <app-video-search (videoSelectEvent)="videoSelectHandler($event);"></app-video-search>
 </nav>
+<section id="main-video-view" *ngIf="selectedVideo">
+  <h1>{{selectedVideo.video_title}}</h1>
+  <section id="video">
+    <div *ngIf="selectedVideo.video_url.includes('youtube')">
+      <iframe width="700" height="395"
+        src="{{selectedVideo.video_url}}?start=3&autoplay=1" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+      </iframe>
+    </div>
+    <div *ngIf="selectedVideo.video_url.includes('vimeo')">
+      <iframe src="{{selectedVideo.video_url}}?autoplay=1&t=3" 
+        width="700" height="395" frameborder="0" allow="autoplay; fullscreen"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+  <section id="video-tags">
+  
+  </section>
+  <section id="video-description">
+  
+  </section>
+</section>
