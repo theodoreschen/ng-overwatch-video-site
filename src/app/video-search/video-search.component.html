@@ -3,15 +3,15 @@
   <form (ngSubmit)="onSubmit()">
     <div>
       <label for="start-date">Start Date</label>
-      <input id="start-date" [ngModel]="startDate" name="start-date" />
+      <input id="start-date" type="date" [(ngModel)]="startDate" name="start-date" />
     </div>
     <div>
       <label for="end-date">End Date</label>
-      <input id="end-date" [ngModel]="endDate" name="end-date" />
+      <input id="end-date" type="date" [(ngModel)]="endDate" name="end-date" />
     </div>
     <div>
       <label for="hero-select">Hero Name</label>
-      <select id="hero-select" [ngModel]="selectedHero" name="hero-select">
+      <select id="hero-select" [(ngModel)]="selectedHero" name="hero-select">
         <option [value]="null"></option>
         <option *ngFor="let hero of overwatchHeroes" [value]="hero.normalizedName">{{hero.name}}</option>
       </select>
@@ -22,5 +22,8 @@
 <section *ngIf="videoSearchResults.length !== 0">
   <h1>Search Results</h1>
   <ul>
+    <li *ngFor="let video of videoSearchResults; let idx = index">
+      <a (click)="selectVideo(idx)">{{video.video_title}}</a>
+    </li>
   </ul>
 </section>

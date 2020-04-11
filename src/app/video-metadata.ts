@@ -1,11 +1,9 @@
-import { Hero } from './hero';
-
 export interface VideoMetadata {
-  videoUrl: string,
-  videoDate: string,
-  videoTitle: string,
-  hero: Hero,
+  video_url: string,
+  video_date: string,
+  video_title: string,
+  hero: string,
   description: string,
-  tags: string,
-  ytIframe: string
+  tags: string[],
+  youtube_iframe: string
 };

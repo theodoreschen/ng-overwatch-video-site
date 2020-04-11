@@ -1,4 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { LoggerService } from './logger.service';
+import { VideoMetadata } from './video-metadata';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -6,5 +11,33 @@ import { Injectable } from '@angular/core';
 export class VideoSearchService {
   private dbUrl = "http://localhost:5000";
 
-  constructor() { }
+  constructor(
+    private log: LoggerService,
+    private http: HttpClient
+  ) { }
+
+  getVideosBySearch (startDate: string, endDate: string, hero: string): Observable<VideoMetadata[]> {
+    let query = {
+      "start_date": startDate? startDate : '',
+      "end_date": endDate? endDate : '',
+      "hero": hero? hero : ''
+    };
+    return this.http.get<VideoMetadata[]>(`${this.dbUrl}/retrieve`, {params: query})
+      .pipe(
+        tap((retrievedVideos: VideoMetadata[]) => {
+          retrievedVideos.forEach( video => {
+            this.log.DEBUG('getVideosBySearch', `retrieved video URL: ${video.video_url}`);
+          });
+        }),
+        catchError(this.handleError<VideoMetadata[]>('getVideosBySearch'))
+      );
+  };
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error("VideoSearchService", error);
+      this.log.ERROR("VideoSearchService", `${operation} failed with error '${error.message}'`);
+      return of(result as T);
+    };
+  }
 }

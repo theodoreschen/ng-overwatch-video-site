@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { OverwatchHeroes } from '../heroes';
 import { Hero } from '../hero';
 import { VideoSearchService } from '../video-search.service';
 import { LoggerService } from '../logger.service';
 import { VideoMetadata } from '../video-metadata';
+import { VideoSearchCacheService } from '../video-search-cache.service';
 
 @Component({
   selector: 'app-video-search',
@@ -12,26 +13,38 @@ import { VideoMetadata } from '../video-metadata';
 })
 export class VideoSearchComponent implements OnInit {
   overwatchHeroes: Hero[] = OverwatchHeroes;
-  videoSearchResults: VideoMetadata[] = [];
+
   selectedHero: string = null;
   startDate: string = null;
   endDate: string = null;
 
+  videoSearchResults: VideoMetadata[] = [];
+  @Output() videoSelectEvent = new EventEmitter<VideoMetadata>();
+
   constructor(
     private log: LoggerService,
     private videoSearch: VideoSearchService,
+    private videoSearchCache: VideoSearchCacheService
   ) { }
 
   ngOnInit (): void {
+    this.videoSearchResults = this.videoSearchCache.cachedResults;
   }
 
   onSubmit (): void {
-    let query = {
-      hero: this.selectedHero,
-      startDate: this.startDate,
-      endDate: this.endDate
-    };
-    this.log.DEBUG("VideoSearchComponent", `query: ${JSON.stringify(query)}`);
+    this.log.DEBUG(
+      "VideoSearchComponent.onSubmit",
+      `hero: ${this.selectedHero}; start date: ${this.startDate}; end date: ${this.endDate}`
+    );
+    this.videoSearch.getVideosBySearch(this.startDate, this.endDate, this.selectedHero)
+      .subscribe(results => {
+        this.videoSearchResults = results;
+        this.videoSearchCache.cachedResults = results;
+      });
   }
 
+  selectVideo (idx: number) {
+    this.log.DEBUG("VideoSearchComponent.selectVideo", `index ${idx} selected`);
+    this.videoSelectEvent.emit(this.videoSearchResults[idx]);
+  } 
 }
