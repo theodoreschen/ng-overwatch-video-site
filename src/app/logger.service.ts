@@ -5,7 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class LoggerService {
   // Level 5 (debug) to 1 (critical)
-  private logLevel = 5;
+  private logLevel: number = 5;
+  levels = [
+    {name: "DEBUG", value: 5},
+    {name: "INFO", value: 4},
+    {name: "WARN", value: 3},
+    {name: "ERROR", value: 2},
+    {name: "CRIT", value: 1}
+  ];
 
   constructor() { }
 
@@ -31,5 +38,9 @@ export class LoggerService {
 
   CRIT (ngSchematic: string, message: string) {
     if (this.logLevel > 0) this.fmtMessage(ngSchematic, message);
+  }
+
+  setLevel (level: number) {
+    this.logLevel = level;
   }
 }
