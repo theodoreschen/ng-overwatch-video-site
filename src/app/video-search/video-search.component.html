@@ -1,15 +1,22 @@
 <section>
   <h1>Video Search</h1>
-  <form>
-    <label>Start Date</label>
-    <input />
-    <label>End Date</label>
-    <input />
-    <label>Hero Name</label>
-    <select>
-      <option *ngFor="let hero of overwatchHeroes">{{hero.name}}</option>
-    </select>
-    <button>Search</button>
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <label for="start-date">Start Date</label>
+      <input id="start-date" [ngModel]="startDate" name="start-date" />
+    </div>
+    <div>
+      <label for="end-date">End Date</label>
+      <input id="end-date" [ngModel]="endDate" name="end-date" />
+    </div>
+    <div>
+      <label for="hero-select">Hero Name</label>
+      <select id="hero-select" [ngModel]="selectedHero" name="hero-select">
+        <option [value]="null"></option>
+        <option *ngFor="let hero of overwatchHeroes" [value]="hero.normalizedName">{{hero.name}}</option>
+      </select>
+    </div>
+    <button type="submit">Search</button>
   </form>
 </section>
 <section *ngIf="videoSearchResults.length !== 0">
