@@ -8,11 +8,16 @@ import { LoggerService } from '../logger.service';
 })
 export class LoggerWidgetComponent implements OnInit {
   levels = [];
+  selectedLevel: number;
 
   constructor(private logService: LoggerService) { }
 
   ngOnInit(): void {
     this.levels = this.logService.levels;
+  }
+
+  setGlobalLogLevel (event: string): void {
+    this.logService.setLevel(+event);
   }
 
 }

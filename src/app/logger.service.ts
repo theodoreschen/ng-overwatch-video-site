@@ -42,5 +42,6 @@ export class LoggerService {
 
   setLevel (level: number) {
     this.logLevel = level;
+    console.log(`global log level: ${this.logLevel}`);
   }
 }
