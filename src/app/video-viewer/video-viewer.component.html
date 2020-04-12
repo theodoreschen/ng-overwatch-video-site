@@ -20,7 +20,9 @@
   <section id="video-tags">
     <ul>
       <li><a (click)="videoSearchByHero(selectedVideo.hero);">#{{selectedVideo.hero}}</a></li>
-      <li *ngFor="let tag of selectedVideo.tags"><a>{{tag}}</a></li>
+      <li *ngFor="let tag of selectedVideo.tags">
+        <a (click)="videoSearchByTag(tag);">{{tag}}</a>
+      </li>
     </ul>
   </section>
   <section id="video-description" *ngIf="selectedVideo.description">

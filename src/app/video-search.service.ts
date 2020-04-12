@@ -4,12 +4,13 @@ import { catchError, tap } from 'rxjs/operators';
 import { LoggerService } from './logger.service';
 import { VideoMetadata } from './video-metadata';
 import { HttpClient } from '@angular/common/http';
+import { dbUrl } from './external-urls';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideoSearchService {
-  private dbUrl = "http://localhost:5000";
+  private dbUrl = dbUrl;
 
   constructor(
     private log: LoggerService,
@@ -31,7 +32,20 @@ export class VideoSearchService {
         }),
         catchError(this.handleError<VideoMetadata[]>('VideoSearchService.getVideosBySearch'))
       );
-  };
+  }
+
+  getVideosByTag (tag: string): Observable<VideoMetadata[]> {
+    let query = {"label": tag};
+    return this.http.get<VideoMetadata[]>(`${this.dbUrl}/retrieve/tag`, {params: query})
+    .pipe(
+      tap((retrievedVideos: VideoMetadata[]) => {
+        retrievedVideos.forEach( video => {
+          this.log.DEBUG('VideoSearchService.getVideosByTag', `retrieved video URL: ${video.video_url}`);
+        });
+      }),
+      catchError(this.handleError<VideoMetadata[]>('VideoSearchService.getVideosByTag'))
+    );
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

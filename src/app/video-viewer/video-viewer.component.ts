@@ -37,7 +37,11 @@ export class VideoViewerComponent implements OnInit {
   }
 
   videoSearchByTag (tag: string) {
-    
+    this.videoSearch.getVideosByTag(tag)
+      .subscribe(results => {
+        this.videoSearchResults = results;
+        this.videoSearchCache.cachedResults = results;
+      });
   }
 
   videoSelectHandler (video: VideoMetadata) {
@@ -54,7 +58,7 @@ export class VideoViewerComponent implements OnInit {
       this.isYoutube = false;
       this.isVimeo = true;
       this.trustedVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-        `${this.selectedVideo.video_url}?autoplay=1`
+        `${this.selectedVideo.video_url}?autoplay=1&t=3`
       );
     }
   }  
