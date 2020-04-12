@@ -1,1 +1,5 @@
-<p>video-update works!</p>
+<nav>
+  <app-video-search [videoSearchResults]="videoSearchResults"
+    (videoSelectEvent)="videoSelectHandler($event);">   
+  </app-video-search>
+</nav>
