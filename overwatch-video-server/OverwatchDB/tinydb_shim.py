@@ -151,4 +151,5 @@ class TinyDBHandler(AbstractDBHandler):
         return result
 
     def update_by_video_url(self, video_url: str, metadata: dict):
+        # TODO: implement a jsonschema validation
         return self._db.update(metadata, Query().video_url == video_url)
