@@ -1,5 +1,7 @@
 <nav>
-  <app-video-search (videoSelectEvent)="videoSelectHandler($event);"></app-video-search>
+  <app-video-search [videoSearchResults]="videoSearchResults"
+    (videoSelectEvent)="videoSelectHandler($event);">   
+  </app-video-search>
 </nav>
 <section id="main-video-view" *ngIf="selectedVideo">
   <h1>{{selectedVideo.video_title}}</h1>
@@ -17,7 +19,7 @@
   </section>
   <section id="video-tags">
     <ul>
-      <li><a>#{{selectedVideo.hero}}</a></li>
+      <li><a (click)="videoSearchByHero(selectedVideo.hero);">#{{selectedVideo.hero}}</a></li>
       <li *ngFor="let tag of selectedVideo.tags"><a>{{tag}}</a></li>
     </ul>
   </section>

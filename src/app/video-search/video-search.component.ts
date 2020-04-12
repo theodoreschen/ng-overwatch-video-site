@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { OverwatchHeroes } from '../heroes';
 import { Hero } from '../hero';
 import { VideoSearchService } from '../video-search.service';
@@ -18,7 +18,7 @@ export class VideoSearchComponent implements OnInit {
   startDate: string = null;
   endDate: string = null;
 
-  videoSearchResults: VideoMetadata[] = [];
+  @Input() videoSearchResults: VideoMetadata[] = [];
   @Output() videoSelectEvent = new EventEmitter<VideoMetadata>();
 
   constructor(
