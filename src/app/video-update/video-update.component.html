@@ -3,3 +3,15 @@
     (videoSelectEvent)="videoSelectHandler($event);">   
   </app-video-search>
 </nav>
+<section *ngIf="selectedVideo">
+  <h1>Editing {{selectedVideo.video_title}} Data</h1>
+  <form (ngSubmit)="onSubmit();">
+    <p id="video-url">URL: {{selectedVideo.video_url}}</p>
+    <div>
+      <label for="video-title">Title</label>
+      <input id="video-title" [(ngModel)]="selectedVideo.video_title"
+        value="{{selectedVideo.video_title}}"/>
+    </div>
+    <button type="submit">Update</button>
+  </form>
+</section>
