@@ -45,7 +45,7 @@ export class VideoViewerComponent implements OnInit {
   }
 
   videoSelectHandler (video: VideoMetadata) {
-    this.log.DEBUG("VideoVewerComponent.videoSelectHandler", JSON.stringify(video));
+    this.log.DEBUG("VideoViewerComponent.videoSelectHandler", JSON.stringify(video));
     this.selectedVideo = video;
     if (this.selectedVideo.video_url.includes("youtube")) {
       this.isYoutube = true;
