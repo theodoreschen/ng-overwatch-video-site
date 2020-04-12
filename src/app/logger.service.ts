@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LoggerService {
   // Level 5 (debug) to 1 (critical)
-  private logLevel: number = 5;
+  private logLevel: number = 3;
   levels = [
     {name: "DEBUG", value: 5},
     {name: "INFO", value: 4},
@@ -42,6 +42,6 @@ export class LoggerService {
 
   setLevel (level: number) {
     this.logLevel = level;
-    console.log(`global log level: ${this.logLevel}`);
+    console.log(`Global log level: ${this.logLevel}`);
   }
 }
