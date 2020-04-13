@@ -10,7 +10,46 @@
     <div>
       <label for="video-title">Title</label>
       <input id="video-title" [(ngModel)]="selectedVideo.video_title"
-        value="{{selectedVideo.video_title}}"/>
+        value="{{selectedVideo.video_title}}" name="video-title"/>
+    </div>
+    <div>
+      <label for="video-hero">Hero</label>
+      <select id="video-hero" [(ngModel)]="selectedVideo.hero" name="video-hero">
+        <option *ngFor="let hero of overwatchHeroes" [value]="hero.normalizedName">
+          {{hero.name}}
+        </option>
+      </select>
+    </div>
+    <div>
+      <label for="video-tags">Tags</label>
+      <ul id="video-tags">
+        <li *ngFor="let tag of selectedVideo.tags; index as idx">
+          <span>{{tag}}</span>
+          <button type="button" (click)="removeTagByIndex(idx);">X</button>
+        </li>
+        <li>
+          <label for="video-add-tag">Add New Tag</label>
+          <input id="video-add-tag" name="video-add-tag" [(ngModel)]="newTagValue" />
+          <button type="button" (click)="addNewTag();">+</button>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <label for="video-date">Date</label>
+      <input type="date" id="video-date" name="video-date"
+        [(ngModel)]="selectedVideo.video_date"/>
+    </div>
+    <div>
+      <label for="video-description">Description</label>
+      <textarea id="video-description" rows="6" cols="50" name="video-description"
+        [(ngModel)]="selectedVideo.description">
+      </textarea>
+    </div>
+    <div>
+      <label for="video-youtube-iframe">YouTube iframe</label>
+      <textarea id="video-youtube-iframe" name="video-youtube-iframe"
+        rows="5" cols="50" [(ngModel)]="selectedVideo.youtube_iframe">
+      </textarea>
     </div>
     <button type="submit">Update</button>
   </form>
