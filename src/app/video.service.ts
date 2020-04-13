@@ -40,14 +40,27 @@ export class VideoService {
   getVideosByTag (tag: string): Observable<VideoMetadata[]> {
     let query = {"label": tag};
     return this.http.get<VideoMetadata[]>(`${this.dbUrl}/retrieve/tag`, {params: query})
-    .pipe(
-      tap((retrievedVideos: VideoMetadata[]) => {
-        retrievedVideos.forEach( video => {
-          this.log.DEBUG('VideoService.getVideosByTag', `retrieved video URL: ${video.video_url}`);
-        });
-      }),
-      catchError(this.handleError<VideoMetadata[]>('VideoService.getVideosByTag'))
-    );
+      .pipe(
+        tap((retrievedVideos: VideoMetadata[]) => {
+          retrievedVideos.forEach( video => {
+            this.log.DEBUG('VideoService.getVideosByTag', `retrieved video URL: ${video.video_url}`);
+          });
+        }),
+        catchError(this.handleError<VideoMetadata[]>('VideoService.getVideosByTag'))
+      );
+  }
+
+  getVideoByUrl (url: string): Observable<VideoMetadata[]> {
+    let query = {"video-url": url};
+    return this.http.get<VideoMetadata[]>(`${this.dbUrl}/retrieve/url`, {params: query})
+      .pipe(
+        tap((retrievedVideos: VideoMetadata[]) => {
+          retrievedVideos.forEach( video => {
+            this.log.DEBUG('VideoService.getVideoByUrl', `retrieved video URL: ${video.video_url}`);
+          });
+        }),
+        catchError(this.handleError<VideoMetadata[]>('VideoService.getVideoByUrl'))
+      );
   }
 
   updateVideo (updatedVideo: VideoMetadata): Observable<any> {
@@ -55,7 +68,7 @@ export class VideoService {
       .pipe(
         tap(_ => this.log.DEBUG("VideoService.updateVideo", `Updating ${JSON.stringify(updatedVideo)}`)),
         catchError(this.handleError<any>("VideoService.updateVideo"))
-      )
+      );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
