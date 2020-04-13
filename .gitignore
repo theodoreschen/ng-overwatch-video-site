@@ -52,4 +52,4 @@ Thumbs.db
 **/venv/
 
 # Project specific code
-**/video-metadata.json
+**/video-metadata*.json
