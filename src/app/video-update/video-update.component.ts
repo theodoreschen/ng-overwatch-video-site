@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoggerService } from '../logger.service';
 import { VideoMetadata } from '../video-metadata';
 import { VideoSearchCacheService } from '../video-search-cache.service';
-import { dummyVideoCache } from './dummy-video-cache';
+// import { dummyVideoCache } from '../dummy-video-cache';
 import { Hero } from '../hero';
 import { OverwatchHeroes } from '../heroes';
 import { VideoService } from '../video.service';
@@ -26,11 +26,11 @@ export class VideoUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.overwatchHeroes = OverwatchHeroes;
     /**Actual Code */
-    // this.videoSearchResults = this.videoSearchCache.cachedResults;
+    this.videoSearchResults = this.videoSearchCache.cachedResults;
     /**Dummy code so I don't have to keep running queries */
-    this.videoSearchResults = dummyVideoCache;
-    this.videoSearchCache.cachedResults = dummyVideoCache;
-    this.selectedVideo = this.videoSearchResults[0];
+    // this.videoSearchResults = dummyVideoCache;
+    // this.videoSearchCache.cachedResults = dummyVideoCache;
+    // this.selectedVideo = this.videoSearchResults[0];
   }
 
   onSubmit(): void {
@@ -40,12 +40,22 @@ export class VideoUpdateComponent implements OnInit {
     );
     this.videoService.updateVideo(this.selectedVideo)
       .subscribe( () => {
-        /**TODO: refresh the appropriate entry in this.videoSearchResults
+        /**Refresh the appropriate entry in this.videoSearchResults
          * and this.videoSearchCache by this.videoSearch.getVideoByUrl()
          */
         this.videoService.getVideoByUrl(this.selectedVideo.video_url)
-          .subscribe( result => {
-            
+          .subscribe(result => {
+            /**Should only be one result */
+            if (result.length !== 1) {
+              this.log.WARN("VideoUpdateComponent.onSubmit", "Multiple results returned when only one was expected");
+              result.forEach( entry => {
+                this.log.WARN("VideoUpdateComponent.onSubmit", `URL Query fetched result: ${JSON.stringify(entry)}`);
+              });
+            }
+            let idx = this.videoSearchResults.findIndex(value => value.video_url === this.selectedVideo.video_url);
+            this.videoSearchResults[idx] = result[0];
+            idx = this.videoSearchCache.cachedResults.findIndex(value => value.video_url === this.selectedVideo.video_url);
+            this.videoSearchCache.cachedResults[idx] = result[0];
           });
         // clear selectedVideo
         this.selectedVideo = <VideoMetadata>{};
