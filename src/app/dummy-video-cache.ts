@@ -1,4 +1,4 @@
-import { VideoMetadata } from '../video-metadata';
+import { VideoMetadata } from './video-metadata';
 
 export const dummyVideoCache: VideoMetadata[] = [
   <VideoMetadata>{"description":null,"hero":"widowmaker","tags":["#sharpshooter"],"type":"highlight","video_date":"2018-05-23","video_title":"20180523_widowmaker","video_url":"https://www.youtube.com/embed/Tk_S1nlAvyY","youtube_iframe":"<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/Tk_S1nlAvyY\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>"},
