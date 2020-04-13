@@ -15,6 +15,8 @@ import signal
 import logging
 import datetime
 import traceback
+import json
+import jsonschema
 
 logging.basicConfig(
     format="[%(asctime)s] - %(levelname)s/%(name)s: %(message)s",
@@ -27,6 +29,8 @@ app = Flask(__name__, static_url_path='')
 CORS(app)
 DB = None
 
+with open("schemas/query_by_url.json") as fd:
+    _QUERY_BY_URL_SCHEMA = json.loads(fd.read())
 
 # @app.route("/")
 # def react_page():
@@ -69,7 +73,6 @@ def retrieve_records_by_tag():
     """
     GET /retrieve/tag?label=TAG
     """
-    retobj = {}
     try:
         tag_label = request.args.get("label")
         LOG.info(f"tag: {tag_label}")
@@ -80,6 +83,28 @@ def retrieve_records_by_tag():
     except Exception as e:
         traceback.print_exc()
         return jsonify([]), 500
+
+
+@app.route("/retrieve/url")
+def retrieve_records_by_url():
+    """
+    GET /retrieve/url
+
+    body: {"video_url": "https://www.youtube.com/embed/deadbeef"}
+    """
+    try:
+        data = request.get_json()
+        jsonschema.validate(data, _QUERY_BY_URL_SCHEMA)
+        LOG.info(f"url: {data['video_url']}")
+        query_results = DB.fetch_by_url(data["video_url"])
+        return jsonify(query_results), 200
+    except jsonschema.ValidationError as e:
+        LOG.warning(str(e))
+        return jsonify([]), 400
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify([]), 500
+
 
 
 @app.route("/populate-db", methods=["post"])

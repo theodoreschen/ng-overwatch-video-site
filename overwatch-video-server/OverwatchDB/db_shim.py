@@ -50,6 +50,10 @@ class AbstractDBHandler(ABC):
         return []
 
     @abstractmethod
+    def fetch_by_url(self, url: str) -> list:
+        return []
+
+    @abstractmethod
     def fetch_by_multiple(
         self, *,
         start_date: Optional[date]=None,

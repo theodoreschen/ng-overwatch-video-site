@@ -1,0 +1,8 @@
+{
+    "$schema": "https://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "video_url": {"type": "string"}
+    },
+    "required": ["video_url"]
+}

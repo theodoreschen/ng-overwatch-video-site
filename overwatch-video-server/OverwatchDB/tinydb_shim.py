@@ -130,6 +130,10 @@ class TinyDBHandler(AbstractDBHandler):
         result.sort(key=self._get_result_sorter_func())
         return result
 
+    def fetch_by_url(self, url: str) -> list:
+        result = self._db.search(Query().video_url == url)
+        return result
+
     def fetch_by_multiple(
         self, *,
         start_date: Optional[datetime.date]=None,
