@@ -11,7 +11,7 @@ import { dbUrl } from './external-urls';
 })
 export class VideoService {
   private dbUrl = dbUrl;
-  jsonHttpOptions = {
+  private jsonHttpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
