@@ -3,14 +3,17 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { LoggerService } from './logger.service';
 import { VideoMetadata } from './video-metadata';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { dbUrl } from './external-urls';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VideoSearchService {
+export class VideoService {
   private dbUrl = dbUrl;
+  jsonHttpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
 
   constructor(
     private log: LoggerService,
@@ -27,10 +30,10 @@ export class VideoSearchService {
       .pipe(
         tap((retrievedVideos: VideoMetadata[]) => {
           retrievedVideos.forEach( video => {
-            this.log.DEBUG('VideoSearchService.getVideosBySearch', `retrieved video URL: ${video.video_url}`);
+            this.log.DEBUG('VideoService.getVideosBySearch', `retrieved video URL: ${video.video_url}`);
           });
         }),
-        catchError(this.handleError<VideoMetadata[]>('VideoSearchService.getVideosBySearch'))
+        catchError(this.handleError<VideoMetadata[]>('VideoService.getVideosBySearch'))
       );
   }
 
@@ -40,11 +43,19 @@ export class VideoSearchService {
     .pipe(
       tap((retrievedVideos: VideoMetadata[]) => {
         retrievedVideos.forEach( video => {
-          this.log.DEBUG('VideoSearchService.getVideosByTag', `retrieved video URL: ${video.video_url}`);
+          this.log.DEBUG('VideoService.getVideosByTag', `retrieved video URL: ${video.video_url}`);
         });
       }),
-      catchError(this.handleError<VideoMetadata[]>('VideoSearchService.getVideosByTag'))
+      catchError(this.handleError<VideoMetadata[]>('VideoService.getVideosByTag'))
     );
+  }
+
+  updateVideo (updatedVideo: VideoMetadata): Observable<any> {
+    return this.http.post(`${this.dbUrl}/update-db`, updatedVideo, this.jsonHttpOptions)
+      .pipe(
+        tap(_ => this.log.DEBUG("VideoService.updateVideo", `Updating ${JSON.stringify(updatedVideo)}`)),
+        catchError(this.handleError<any>("VideoService.updateVideo"))
+      )
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
