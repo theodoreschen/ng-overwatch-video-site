@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VideoMetadata } from '../video-metadata';
 import { LoggerService } from '../logger.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { VideoSearchService } from '../video-search.service';
+import { VideoService } from '../video.service';
 import { VideoSearchCacheService } from '../video-search-cache.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class VideoViewerComponent implements OnInit {
   constructor(
     private log: LoggerService,
     private sanitizer: DomSanitizer,
-    private videoSearch: VideoSearchService,
+    private videoService: VideoService,
     private videoSearchCache: VideoSearchCacheService,
   ) { }
 
@@ -29,7 +29,7 @@ export class VideoViewerComponent implements OnInit {
   }
 
   videoSearchByHero (hero: string) {
-    this.videoSearch.getVideosBySearch('', '', hero)
+    this.videoService.getVideosBySearch('', '', hero)
       .subscribe(results => {
         this.videoSearchResults = results;
         this.videoSearchCache.cachedResults = results;
@@ -37,7 +37,7 @@ export class VideoViewerComponent implements OnInit {
   }
 
   videoSearchByTag (tag: string) {
-    this.videoSearch.getVideosByTag(tag)
+    this.videoService.getVideosByTag(tag)
       .subscribe(results => {
         this.videoSearchResults = results;
         this.videoSearchCache.cachedResults = results;

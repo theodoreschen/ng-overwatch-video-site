@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { OverwatchHeroes } from '../heroes';
 import { Hero } from '../hero';
-import { VideoSearchService } from '../video-search.service';
+import { VideoService } from '../video.service';
 import { LoggerService } from '../logger.service';
 import { VideoMetadata } from '../video-metadata';
 import { VideoSearchCacheService } from '../video-search-cache.service';
@@ -23,7 +23,7 @@ export class VideoSearchComponent implements OnInit {
 
   constructor(
     private log: LoggerService,
-    private videoSearch: VideoSearchService,
+    private videoService: VideoService,
     private videoSearchCache: VideoSearchCacheService
   ) { }
 
@@ -36,7 +36,7 @@ export class VideoSearchComponent implements OnInit {
       "VideoSearchComponent.onSubmit",
       `hero: ${this.selectedHero}; start date: ${this.startDate}; end date: ${this.endDate}`
     );
-    this.videoSearch.getVideosBySearch(this.startDate, this.endDate, this.selectedHero)
+    this.videoService.getVideosBySearch(this.startDate, this.endDate, this.selectedHero)
       .subscribe(results => {
         this.videoSearchResults = results;
         this.videoSearchCache.cachedResults = results;
