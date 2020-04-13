@@ -15,8 +15,6 @@ import signal
 import logging
 import datetime
 import traceback
-import json
-import jsonschema
 
 logging.basicConfig(
     format="[%(asctime)s] - %(levelname)s/%(name)s: %(message)s",
@@ -28,9 +26,6 @@ LOG.setLevel(logging.INFO)
 app = Flask(__name__, static_url_path='')
 CORS(app)
 DB = None
-
-with open("schemas/query_by_url.json") as fd:
-    _QUERY_BY_URL_SCHEMA = json.loads(fd.read())
 
 # @app.route("/")
 # def react_page():
@@ -88,19 +83,13 @@ def retrieve_records_by_tag():
 @app.route("/retrieve/url")
 def retrieve_records_by_url():
     """
-    GET /retrieve/url
-
-    body: {"video_url": "https://www.youtube.com/embed/deadbeef"}
+    GET /retrieve/url?video-url=https%3A%2F%2Fwww.youtube.com%2Fembed%2Fdeadbeef
     """
     try:
-        data = request.get_json()
-        jsonschema.validate(data, _QUERY_BY_URL_SCHEMA)
-        LOG.info(f"url: {data['video_url']}")
-        query_results = DB.fetch_by_url(data["video_url"])
+        url = request.args.get("video-url")
+        LOG.info(f"url: {url}")
+        query_results = DB.fetch_by_url(url)
         return jsonify(query_results), 200
-    except jsonschema.ValidationError as e:
-        LOG.warning(str(e))
-        return jsonify([]), 400
     except Exception as e:
         traceback.print_exc()
         return jsonify([]), 500
