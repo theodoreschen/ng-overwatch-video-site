@@ -115,8 +115,8 @@ def populate_db():
     try:
         data = request.get_json()
         LOG.debug(data)
-        DB.insert(data)
-        return '', 200
+        res = DB.insert(data)
+        return res
     except Exception as e:
         return str(e), 500
 

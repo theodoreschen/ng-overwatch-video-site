@@ -9,7 +9,7 @@ import logging
 import json
 import jsonschema
 import datetime
-from typing import Optional
+from typing import Optional, List
 import traceback
 
 logging.basicConfig(
@@ -62,10 +62,14 @@ class TinyDBHandler(AbstractDBHandler):
             raise ValueError(f"{date_prototype} is before Overwatch release day")
         return candidate.isoformat()
 
-    def _parse_tags(self, tags: str) -> list:
-        if tags is None:
-            return []
-        return [tag for tag in tags.split() if tag.startswith("#")]
+    def _parse_tags(self, tags: List[str]) -> List[str]:
+        for idx, tag in enumerate(tags):
+            if not tag.startswith("#"):
+                tags[idx] = f"#{tag}"
+        return tags
+        # if tags is None:
+            # return []
+        # return [tag for tag in tags.split() if tag.startswith("#")]
     
     def insert(self, data: dict) -> tuple:
         try:
