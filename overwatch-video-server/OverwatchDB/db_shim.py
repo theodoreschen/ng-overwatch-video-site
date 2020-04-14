@@ -66,3 +66,7 @@ class AbstractDBHandler(ABC):
     @abstractmethod
     def update_by_video_url(self, video_url: str, metadata: dict) -> bool:
         return False
+
+    @abstractmethod
+    def delete_by_video_url(self, video_url: str) -> bool:
+        return False

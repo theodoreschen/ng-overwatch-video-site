@@ -71,6 +71,15 @@ export class VideoService {
       );
   }
 
+  deleteVideoByUrl (url: string): Observable<any> {
+    let query = {"video-url": url};
+    return this.http.delete(`${this.dbUrl}/url`, {params: query})
+      .pipe(
+        tap(_ => this.log.DEBUG("VideoService.deleteVideoByUrl", `Deleting ${JSON.stringify(url)}`)),
+        catchError(this.handleError<any>("VideoService.deleteVideoByUrl"))
+      );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

@@ -53,4 +53,11 @@
     </div>
     <button type="submit">Update</button>
   </form>
+  <section id="delete-video">
+    <h1>Delete this video</h1>
+    <div>
+      <span>Be very sure; there's no going back on this</span>
+      <button type="button" (click)="deleteVideo(selectedVideo.video_url);">Delete</button>
+    </div>
+  </section>
 </section>

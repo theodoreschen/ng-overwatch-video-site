@@ -10,6 +10,7 @@ import json
 import jsonschema
 import datetime
 from typing import Optional
+import traceback
 
 logging.basicConfig(
     format="[%(asctime)s] - %(levelname)s/%(name)s: %(message)s",
@@ -154,6 +155,19 @@ class TinyDBHandler(AbstractDBHandler):
         result.sort(key=self._get_result_sorter_func())
         return result
 
-    def update_by_video_url(self, video_url: str, metadata: dict):
+    def update_by_video_url(self, video_url: str, metadata: dict) -> bool:
         # TODO: implement a jsonschema validation
-        return self._db.update(metadata, Query().video_url == video_url)
+        try:
+            self._db.update(metadata, Query().video_url == video_url)
+            return True
+        except Exception as e:
+            traceback.print_exc()
+            return False
+
+    def delete_by_video_url(self, video_url) -> bool:
+        try:
+            self._db.remove(Query().video_url == video_url)
+            return True
+        except Exception as e:
+            traceback.print_exc()
+            return False

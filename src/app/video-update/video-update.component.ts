@@ -82,8 +82,20 @@ export class VideoUpdateComponent implements OnInit {
     this.newTagValue = null;
   }
 
-  videoSelectHandler (video: VideoMetadata) {
+  videoSelectHandler(video: VideoMetadata): void {
     this.log.DEBUG("VideoUpdateComponent.videoSelectHandler", JSON.stringify(video));
     this.selectedVideo = video;
+  }
+
+  deleteVideo(url: string): void {
+    this.log.DEBUG("VideoUpdateComponent.deleteVideo", `Deleting ${url}`);
+    this.videoService.deleteVideoByUrl(url).subscribe(() => {
+      // Cleaning up search results and cached results without doing another query
+      let idx = this.videoSearchResults.findIndex(value => value.video_url === this.selectedVideo.video_url);
+      this.videoSearchResults.splice(idx, 1);
+      idx = this.videoSearchCache.cachedResults.findIndex(value => value.video_url === this.selectedVideo.video_url);
+      this.videoSearchCache.cachedResults.splice(idx, 1);
+      this.selectedVideo = <VideoMetadata>{};
+    });
   }
 }

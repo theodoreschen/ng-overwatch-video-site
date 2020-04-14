@@ -95,13 +95,28 @@ def retrieve_records_by_url():
         return jsonify([]), 500
 
 
+@app.route("/url", methods=["delete"])
+def delete_record_by_url():
+    """
+    DELETE /url?video-url=https%3A%2F%2Fwww.youtube.com%2Fembed%2Fdeadbeef
+    """
+    try:
+        url = request.args.get("video-url")
+        LOG.info(f"url: {url}")
+        DB.delete_by_video_url(url)
+        return '', 200
+    except Exception as e:
+        traceback.print_exc()
+        return str(e), 500
+
 
 @app.route("/populate-db", methods=["post"])
 def populate_db():
     try:
         data = request.get_json()
         LOG.debug(data)
-        return DB.insert(data)
+        DB.insert(data)
+        return '', 200
     except Exception as e:
         return str(e), 500
 
