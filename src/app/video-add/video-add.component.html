@@ -2,7 +2,8 @@
 <form (ngSubmit)="onSubmit()" #OwHeroForm="ngForm">
   <div>
     <label for="db-form-video-url">Video URL</label>
-    <textarea id="db-form-video-url" rows="1" cols="50" required></textarea>
+    <textarea id="db-form-video-url" rows="1" cols="50" required
+      name="db-form-video-url" [(ngModel)]="videoEntry.video_url"></textarea>
     <p class="hint">
       Website (YouTube/Vimeo) URL of video. Hint: grab the URL in the
       "src" attribute in the HTML iframe.
@@ -10,7 +11,8 @@
   </div>
   <div>
     <label for="db-form-video-iframe">HTML iframe</label>
-    <textarea id="db-form-video-iframe" rows="4" cols="50" required></textarea>
+    <textarea id="db-form-video-iframe" rows="4" cols="50" required
+      name="db-form-video-iframe" [(ngModel)]="videoEntry.youtube_iframe"></textarea>
     <p class="hint">
       Generated embed &lt;iframe /&gt; code from YouTube/Vimeo to insert
       YouTube/Vimeo video players.
@@ -18,14 +20,16 @@
   </div>
   <div>
     <label for="db-form-video-date">Video Date</label>
-    <input type="date" id="db-form-video-date" required />
+    <input type="date" id="db-form-video-date" name="db-form-video-date"
+      [(ngModel)]="videoEntry.video_date" required />
     <p class="hint">
       Date video was created
     </p>
   </div>
   <div>
     <label for="db-form-hero-name">Hero Name</label>
-    <select id="db-form-hero-name">
+    <select id="db-form-hero-name" name="db-form-hero-name" 
+      [(ngModel)]="videoEntry.hero" required>
       <option *ngFor="let hero of overwatchHeroes" [value]="hero.normalizedName">
         {{hero.name}}
       </option>
@@ -33,7 +37,8 @@
   </div>
   <div>
     <label for="db-form-video-title">Alternate Title</label>
-    <input id="db-form-video-title" />
+    <input id="db-form-video-title" name="db-form-video-title"
+      [(ngModel)]="videoEntry.video_title"/>
     <p class="hint">
       Alternate title for video to display. Default:
       <code>&lt;hero name&gt;_&lt;video date&gt;</code>
@@ -41,7 +46,8 @@
   </div>
   <div>
     <label for="db-form-clip-type">Clip Type</label>
-    <select id="db-form-clip-type">
+    <select id="db-form-clip-type" name="db-form-clip-type"
+      [(ngModel)]="videoEntry.type">
       <option value="highlight">Highlight</option>
       <option value="potg">PotG</option>
     </select>
@@ -51,17 +57,23 @@
   </div>
   <div>
     <label for="db-form-tags">Tags</label>
-    <input id="db-form-tags" /><button type="button">Add Tag</button>
-    <div></div>
+    <input id="db-form-tags" name="db-form-tags" [(ngModel)]="newTagValue"/>
+    <button type="button" (click)="addTag();">Add Tag</button>
+    <div class="tag-cards">
+      <div class="tag-card" *ngFor="let tag of videoEntry.tags; index as idx">
+        <span>{{tag}}</span><button type="button" (click)="removeTag(idx);">X</button>
+      </div>
+    </div>
     <p class="hint">Add tags to the video for cross-referencing</p>
   </div>
   <div>
     <label for="db-form-description">Description</label>
-    <textarea id="db-form-description" rows="4" cols="50"></textarea>
+    <textarea id="db-form-description" rows="4" cols="50"
+      name="db-form-description" [(ngModel)]="videoEntry.description"></textarea>
     <p class="hint">Personal commentary, if desired</p>
   </div>
   <div>
-    <button type=submit disabled>Submit</button>
-    <button type="button">Clear</button>
+    <button type=submit [disabled]="OwHeroForm.form.invalid">Submit</button>
+    <button type="button" (click)="clearForm();">Clear</button>
   </div>
 </form>

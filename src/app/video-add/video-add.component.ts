@@ -11,6 +11,7 @@ import { OverwatchHeroes } from '../heroes';
 })
 export class VideoAddComponent implements OnInit {
   overwatchHeroes: Hero[];
+  newTagValue: string;
   videoEntry: VideoMetadata;
 
   constructor(
@@ -18,8 +19,28 @@ export class VideoAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.videoEntry = <VideoMetadata>{};
+    this.videoEntry = <VideoMetadata>{tags: []};
     this.overwatchHeroes = OverwatchHeroes;
+  }
+
+  addTag(): void {
+    if (!this.newTagValue.startsWith("#")) this.newTagValue = `#${this.newTagValue}`;
+    if (this.videoEntry.tags.findIndex(value => value === this.newTagValue) === -1) {
+      this.log.DEBUG("VideoAddComponent.addTag", `Adding tag "${this.newTagValue}"`);
+      this.videoEntry.tags.push(this.newTagValue);
+    } else {
+      this.log.DEBUG("VideoAddComponent.addTag", `Tag "${this.newTagValue}" already exists`);
+    }
+    this.newTagValue = null;
+  }
+
+  removeTag(index: number): void {
+    this.log.DEBUG("VideoAddComponent.removeTag", `Removing tag at ${index}`);
+    this.videoEntry.tags.splice(index, 1);
+  }
+
+  clearForm(): void {
+    this.videoEntry = <VideoMetadata>{tags: []};
   }
 
   onSubmit(): void {
@@ -27,5 +48,6 @@ export class VideoAddComponent implements OnInit {
       "VideoAddComponent.onSubmit",
       `${JSON.stringify(this.videoEntry)} sent to DB`
     );
+    this.clearForm();
   }
 }
