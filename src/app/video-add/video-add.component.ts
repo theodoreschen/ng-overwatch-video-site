@@ -25,6 +25,16 @@ export class VideoAddComponent implements OnInit {
     this.overwatchHeroes = OverwatchHeroes;
   }
 
+  htmlIframeOnBlur(): void {
+    if ((this.videoEntry.video_title === null) && (this.videoEntry.youtube_iframe !== null)) {
+      let found = this.videoEntry.youtube_iframe.match(/src=\"[:\/\.\-\_\w]+\"/);
+      if (found.length !== 0) {
+        // we only want URL, so trim 'src="' and the trailing '"'
+        this.videoEntry.video_url = found[0].substr(5, found[0].length-6);
+      }
+    }
+  }
+
   addTag(): void {
     if (!this.newTagValue.startsWith("#")) this.newTagValue = `#${this.newTagValue}`;
     if (this.videoEntry.tags.findIndex(value => value === this.newTagValue) === -1) {
