@@ -4,6 +4,7 @@ export interface VideoMetadata {
   video_title: string,
   hero: string,
   description: string,
+  type: string,
   tags: string[],
   youtube_iframe: string
 };
