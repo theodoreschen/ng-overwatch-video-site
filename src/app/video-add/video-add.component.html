@@ -3,7 +3,10 @@
   <div>
     <label for="db-form-video-url">Video URL</label>
     <textarea id="db-form-video-url" rows="1" cols="50" required></textarea>
-    <p class="hint">Website (YouTube/Vimeo) URL of video</p>
+    <p class="hint">
+      Website (YouTube/Vimeo) URL of video. Hint: grab the URL in the
+      "src" attribute in the HTML iframe.
+    </p>
   </div>
   <div>
     <label for="db-form-video-iframe">HTML iframe</label>
@@ -22,7 +25,11 @@
   </div>
   <div>
     <label for="db-form-hero-name">Hero Name</label>
-    <select></select>
+    <select id="db-form-hero-name">
+      <option *ngFor="let hero of overwatchHeroes" [value]="hero.normalizedName">
+        {{hero.name}}
+      </option>
+    </select>
   </div>
   <div>
     <label for="db-form-video-title">Alternate Title</label>
@@ -34,25 +41,27 @@
   </div>
   <div>
     <label for="db-form-clip-type">Clip Type</label>
-    <select>
+    <select id="db-form-clip-type">
       <option value="highlight">Highlight</option>
       <option value="potg">PotG</option>
     </select>
     <p class="hint">
-      Choose between "highlight" or "PotG". Default: highlight
+      Choose between "Highlight" or "PotG". Default: Highlight
     </p>
   </div>
   <div>
     <label for="db-form-tags">Tags</label>
-    <ul id="db-form-tags">
-      <li><span>Add Tag</span><input /><button type="button">+</button></li>
-      <li></li>
-    </ul>
+    <input id="db-form-tags" /><button type="button">Add Tag</button>
+    <div></div>
     <p class="hint">Add tags to the video for cross-referencing</p>
   </div>
   <div>
     <label for="db-form-description">Description</label>
     <textarea id="db-form-description" rows="4" cols="50"></textarea>
     <p class="hint">Personal commentary, if desired</p>
+  </div>
+  <div>
+    <button type=submit disabled>Submit</button>
+    <button type="button">Clear</button>
   </div>
 </form>

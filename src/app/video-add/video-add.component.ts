@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoMetadata } from '../video-metadata';
 import { LoggerService } from '../logger.service';
+import { Hero } from '../hero';
+import { OverwatchHeroes } from '../heroes';
 
 @Component({
   selector: 'app-video-add',
@@ -8,6 +10,7 @@ import { LoggerService } from '../logger.service';
   styleUrls: ['./video-add.component.css']
 })
 export class VideoAddComponent implements OnInit {
+  overwatchHeroes: Hero[];
   videoEntry: VideoMetadata;
 
   constructor(
@@ -16,6 +19,7 @@ export class VideoAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.videoEntry = <VideoMetadata>{};
+    this.overwatchHeroes = OverwatchHeroes;
   }
 
   onSubmit(): void {
