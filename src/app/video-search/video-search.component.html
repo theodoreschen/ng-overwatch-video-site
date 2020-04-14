@@ -1,15 +1,19 @@
-<section>
+<section class="video-search-menu">
   <h1>Video Search</h1>
-  <form (ngSubmit)="onSubmit()">
-    <div>
-      <label for="start-date">Start Date</label>
+  <form (ngSubmit)="onSubmit();">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" for="start-date">Start Date</span>
+      </div>
       <input id="start-date" type="date" [(ngModel)]="startDate" name="start-date" />
     </div>
-    <div>
-      <label for="end-date">End Date</label>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" for="end-date">End Date</span>
+      </div>
       <input id="end-date" type="date" [(ngModel)]="endDate" name="end-date" />
     </div>
-    <div>
+    <div class="input-group">
       <label for="hero-select">Hero Name</label>
       <select id="hero-select" [(ngModel)]="selectedHero" name="hero-select">
         <option [value]="null"></option>
@@ -18,12 +22,12 @@
     </div>
     <button type="submit">Search</button>
   </form>
-</section>
-<section *ngIf="videoSearchResults.length !== 0">
-  <h1>Search Results</h1>
-  <ul>
-    <li *ngFor="let video of videoSearchResults; let idx = index">
-      <a (click)="selectVideo(idx)">{{video.video_title}}</a>
-    </li>
-  </ul>
+  <section class="video-search-results" *ngIf="videoSearchResults.length !== 0">
+    <h1>Search Results</h1>
+    <ul>
+      <li *ngFor="let video of videoSearchResults; let idx = index">
+        <a (click)="selectVideo(idx)">{{video.video_title}}</a>
+      </li>
+    </ul>
+  </section>
 </section>

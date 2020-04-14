@@ -1,31 +1,30 @@
-<nav>
-  <app-video-search [videoSearchResults]="videoSearchResults"
-    (videoSelectEvent)="videoSelectHandler($event);">   
-  </app-video-search>
-</nav>
-<section id="main-video-view" *ngIf="selectedVideo">
-  <h1>{{selectedVideo.video_title}}</h1>
-  <section id="video">
-    <div *ngIf="isYoutube">
-      <iframe width="700" height="395" [src]="trustedVideoUrl"
-        frameborder="0" allowFullScreen>
-      </iframe>
-    </div>
-    <div *ngIf="isVimeo">
-      <iframe [src]="trustedVideoUrl"  width="700" height="395"
-        frameborder="0" allowfullscreen>
-      </iframe>
-    </div>
+<div class="row">
+  <nav class="col-sm-4 col-md-3">
+    <app-video-search [videoSearchResults]="videoSearchResults" (videoSelectEvent)="videoSelectHandler($event);">
+    </app-video-search>
+  </nav>
+  <section class="col-sm-8 col-md-9" id="main-video-view" *ngIf="selectedVideo">
+    <h1>{{selectedVideo.video_title}}</h1>
+    <section id="video">
+      <div *ngIf="isYoutube">
+        <iframe width="700" height="395" [src]="trustedVideoUrl" frameborder="0" allowFullScreen>
+        </iframe>
+      </div>
+      <div *ngIf="isVimeo">
+        <iframe [src]="trustedVideoUrl" width="700" height="395" frameborder="0" allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+    <section id="video-tags">
+      <ul>
+        <li><a (click)="videoSearchByHero(selectedVideo.hero);">#{{selectedVideo.hero}}</a></li>
+        <li *ngFor="let tag of selectedVideo.tags">
+          <a (click)="videoSearchByTag(tag);">{{tag}}</a>
+        </li>
+      </ul>
+    </section>
+    <section id="video-description" *ngIf="selectedVideo.description">
+      <p>{{selectedVideo.description}}</p>
+    </section>
   </section>
-  <section id="video-tags">
-    <ul>
-      <li><a (click)="videoSearchByHero(selectedVideo.hero);">#{{selectedVideo.hero}}</a></li>
-      <li *ngFor="let tag of selectedVideo.tags">
-        <a (click)="videoSearchByTag(tag);">{{tag}}</a>
-      </li>
-    </ul>
-  </section>
-  <section id="video-description" *ngIf="selectedVideo.description">
-    <p>{{selectedVideo.description}}</p>
-  </section>
-</section>
+</div>

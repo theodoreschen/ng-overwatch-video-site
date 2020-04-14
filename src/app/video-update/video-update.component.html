@@ -1,9 +1,9 @@
-<nav>
+<nav class="col-sm-3">
   <app-video-search [videoSearchResults]="videoSearchResults"
     (videoSelectEvent)="videoSelectHandler($event);">   
   </app-video-search>
 </nav>
-<section *ngIf="selectedVideo">
+<section class="col-sm-9" *ngIf="selectedVideo">
   <h1>Editing {{selectedVideo.video_title}} Data</h1>
   <form (ngSubmit)="onSubmit();">
     <p id="video-url">URL: {{selectedVideo.video_url}}</p>
