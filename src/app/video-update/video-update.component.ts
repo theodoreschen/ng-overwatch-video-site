@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoggerService } from '../logger.service';
-import { VideoMetadata } from '../video-metadata';
+import { VideoMetadata, initializeVideoMetadata } from '../video-metadata';
 import { VideoSearchCacheService } from '../video-search-cache.service';
 // import { dummyVideoCache } from '../dummy-video-cache';
 import { Hero } from '../hero';
@@ -58,7 +58,7 @@ export class VideoUpdateComponent implements OnInit {
             this.videoSearchCache.cachedResults[idx] = result[0];
           });
         // clear selectedVideo
-        this.selectedVideo = <VideoMetadata>{tags: []};
+        this.selectedVideo = initializeVideoMetadata();
       });
   }
 
@@ -95,7 +95,7 @@ export class VideoUpdateComponent implements OnInit {
       this.videoSearchResults.splice(idx, 1);
       idx = this.videoSearchCache.cachedResults.findIndex(value => value.video_url === this.selectedVideo.video_url);
       this.videoSearchCache.cachedResults.splice(idx, 1);
-      this.selectedVideo = <VideoMetadata>{tags: []};
+      this.selectedVideo = initializeVideoMetadata();
     });
   }
 }
