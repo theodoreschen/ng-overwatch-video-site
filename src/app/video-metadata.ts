@@ -1,13 +1,13 @@
 export function initializeVideoMetadata(): VideoMetadata {
   return <VideoMetadata>{
-    video_url: '',
-    video_date: '',
-    video_title: '',
-    hero: '',
-    description: '',
-    type: '',
+    video_url: null,
+    video_date: null,
+    video_title: null,
+    hero: null,
+    description: null,
+    type: null,
     tags: [],
-    youtube_iframe: ''
+    youtube_iframe: null
   };
 }
 
