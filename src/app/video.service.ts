@@ -71,6 +71,14 @@ export class VideoService {
       );
   }
 
+  uploadVideo (videoData: VideoMetadata): Observable<any> {
+    return this.http.post(`${this.dbUrl}/populate-db`, videoData, this.jsonHttpOptions)
+      .pipe(
+        tap(_ => this.log.DEBUG("VideoService.uploadVideo", `Uploading ${JSON.stringify(videoData)}`)),
+        catchError(this.handleError<any>("VideoService.uploadVideo"))
+      )
+  }
+
   deleteVideoByUrl (url: string): Observable<any> {
     let query = {"video-url": url};
     return this.http.delete(`${this.dbUrl}/url`, {params: query})

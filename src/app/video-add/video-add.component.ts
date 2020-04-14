@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { VideoMetadata } from '../video-metadata';
+import { VideoMetadata, initializeVideoMetadata } from '../video-metadata';
 import { LoggerService } from '../logger.service';
 import { Hero } from '../hero';
 import { OverwatchHeroes } from '../heroes';
+import { VideoService } from '../video.service';
 
 @Component({
   selector: 'app-video-add',
@@ -15,11 +16,12 @@ export class VideoAddComponent implements OnInit {
   videoEntry: VideoMetadata;
 
   constructor(
-    private log: LoggerService
+    private log: LoggerService,
+    private videoService: VideoService
   ) { }
 
   ngOnInit(): void {
-    this.videoEntry = <VideoMetadata>{tags: []};
+    this.videoEntry = initializeVideoMetadata();
     this.overwatchHeroes = OverwatchHeroes;
   }
 
@@ -40,7 +42,7 @@ export class VideoAddComponent implements OnInit {
   }
 
   clearForm(): void {
-    this.videoEntry = <VideoMetadata>{tags: []};
+    this.videoEntry = initializeVideoMetadata();
   }
 
   onSubmit(): void {
@@ -48,6 +50,8 @@ export class VideoAddComponent implements OnInit {
       "VideoAddComponent.onSubmit",
       `${JSON.stringify(this.videoEntry)} sent to DB`
     );
-    this.clearForm();
+    this.videoService.uploadVideo(this.videoEntry).subscribe(() => {
+      this.clearForm();
+    })
   }
 }

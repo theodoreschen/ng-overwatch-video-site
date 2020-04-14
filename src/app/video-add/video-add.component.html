@@ -2,8 +2,8 @@
 <form (ngSubmit)="onSubmit()" #OwHeroForm="ngForm">
   <div>
     <label for="db-form-video-url">Video URL</label>
-    <textarea id="db-form-video-url" rows="1" cols="50" required
-      name="db-form-video-url" [(ngModel)]="videoEntry.video_url"></textarea>
+    <input id="db-form-video-url" required
+      name="db-form-video-url" [(ngModel)]="videoEntry.video_url" />
     <p class="hint">
       Website (YouTube/Vimeo) URL of video. Hint: grab the URL in the
       "src" attribute in the HTML iframe.
@@ -11,8 +11,9 @@
   </div>
   <div>
     <label for="db-form-video-iframe">HTML iframe</label>
-    <textarea id="db-form-video-iframe" rows="4" cols="50" required
-      name="db-form-video-iframe" [(ngModel)]="videoEntry.youtube_iframe"></textarea>
+    <textarea id="db-form-video-iframe" rows="5" cols="50" required
+      name="db-form-video-iframe" [(ngModel)]="videoEntry.youtube_iframe">
+    </textarea>
     <p class="hint">
       Generated embed &lt;iframe /&gt; code from YouTube/Vimeo to insert
       YouTube/Vimeo video players.
