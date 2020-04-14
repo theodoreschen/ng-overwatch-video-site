@@ -1,1 +1,58 @@
-<p>video-add works!</p>
+<h1>Overwatch Database Form</h1>
+<form (ngSubmit)="onSubmit()" #OwHeroForm="ngForm">
+  <div>
+    <label for="db-form-video-url">Video URL</label>
+    <textarea id="db-form-video-url" rows="1" cols="50" required></textarea>
+    <p class="hint">Website (YouTube/Vimeo) URL of video</p>
+  </div>
+  <div>
+    <label for="db-form-video-iframe">HTML iframe</label>
+    <textarea id="db-form-video-iframe" rows="4" cols="50" required></textarea>
+    <p class="hint">
+      Generated embed &lt;iframe /&gt; code from YouTube/Vimeo to insert
+      YouTube/Vimeo video players.
+    </p>
+  </div>
+  <div>
+    <label for="db-form-video-date">Video Date</label>
+    <input type="date" id="db-form-video-date" required />
+    <p class="hint">
+      Date video was created
+    </p>
+  </div>
+  <div>
+    <label for="db-form-hero-name">Hero Name</label>
+    <select></select>
+  </div>
+  <div>
+    <label for="db-form-video-title">Alternate Title</label>
+    <input id="db-form-video-title" />
+    <p class="hint">
+      Alternate title for video to display. Default:
+      <code>&lt;hero name&gt;_&lt;video date&gt;</code>
+    </p>
+  </div>
+  <div>
+    <label for="db-form-clip-type">Clip Type</label>
+    <select>
+      <option value="highlight">Highlight</option>
+      <option value="potg">PotG</option>
+    </select>
+    <p class="hint">
+      Choose between "highlight" or "PotG". Default: highlight
+    </p>
+  </div>
+  <div>
+    <label for="db-form-tags">Tags</label>
+    <ul id="db-form-tags">
+      <li><span>Add Tag</span><input /><button type="button">+</button></li>
+      <li></li>
+    </ul>
+    <p class="hint">Add tags to the video for cross-referencing</p>
+  </div>
+  <div>
+    <label for="db-form-description">Description</label>
+    <textarea id="db-form-description" rows="4" cols="50"></textarea>
+    <p class="hint">Personal commentary, if desired</p>
+  </div>
+</form>
