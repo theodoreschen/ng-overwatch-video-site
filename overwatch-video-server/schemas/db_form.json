@@ -9,6 +9,7 @@
             "ana", "ashe",
             "baptiste", "bastion", "brigitte",
             "dva", "doomfist",
+            "echo",
             "genji",
             "hanzo",
             "junkrat",
@@ -23,7 +24,12 @@
             "zarya", "zenyatta"
         ]},
         "description": {"type": ["null", "string"]},
-        "tags": {"type": ["null", "string"]},
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
         "youtube_iframe": {"type": ["null", "string"]}
     },
     "required": [

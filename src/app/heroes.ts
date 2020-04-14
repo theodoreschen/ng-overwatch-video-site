@@ -8,6 +8,7 @@ export const OverwatchHeroes: Hero[] = [
   { name: "Brigitte", normalizedName: "brigitte" },
   { name: "D.Va", normalizedName: "dva" },
   { name: "Doomfist", normalizedName: "doomfist" },
+  { name: "Echo", normalizedName: "echo" },
   { name: "Genji", normalizedName: "genji" },
   { name: "Hanzo", normalizedName: "hanzo" },
   { name: "Junkrat", normalizedName: "junkrat" },

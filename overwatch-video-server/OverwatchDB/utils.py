@@ -9,6 +9,7 @@ class OverwatchHeroes(Enum):
     Brigitte = auto()
     DVa = auto()
     Doomfist = auto()
+    Echo = auto()
     Genji = auto()
     Hanzo = auto()
     Junkrat = auto()
