@@ -58,7 +58,7 @@ export class VideoUpdateComponent implements OnInit {
             this.videoSearchCache.cachedResults[idx] = result[0];
           });
         // clear selectedVideo
-        this.selectedVideo = <VideoMetadata>{};
+        this.selectedVideo = <VideoMetadata>{tags: []};
       });
   }
 
@@ -95,7 +95,7 @@ export class VideoUpdateComponent implements OnInit {
       this.videoSearchResults.splice(idx, 1);
       idx = this.videoSearchCache.cachedResults.findIndex(value => value.video_url === this.selectedVideo.video_url);
       this.videoSearchCache.cachedResults.splice(idx, 1);
-      this.selectedVideo = <VideoMetadata>{};
+      this.selectedVideo = <VideoMetadata>{tags: []};
     });
   }
 }
