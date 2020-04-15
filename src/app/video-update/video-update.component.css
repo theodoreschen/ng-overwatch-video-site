@@ -6,9 +6,17 @@ section.update-form {
   padding-top: 120px;
 }
 
+section.update-form form {
+  margin-bottom: 20px;
+}
+
 section.update-form h1 {
   font-size: 1.5em;
   font-weight: bold;
+}
+
+div.input-group {
+  width: 700px;
 }
 
 #add-new-tag {
@@ -50,8 +58,4 @@ span.video-tag button:hover {
 span.video-tag button:active {
   background-color: rgb(128, 0, 0);
   box-shadow: none;
-}
-
-form {
-  margin-bottom: 20px;
 }

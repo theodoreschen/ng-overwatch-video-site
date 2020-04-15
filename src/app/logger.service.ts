@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LoggerService {
-  develMode: boolean = true;
+  develMode: boolean = false;
   // Level 5 (debug) to 1 (critical)
   private logLevel: number = 3;
   levels = [
