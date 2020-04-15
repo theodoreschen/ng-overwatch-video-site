@@ -1,0 +1,12 @@
+[class^="col-"] {
+  padding: 0px;
+}
+
+section.update-form {
+  padding-top: 120px;
+}
+
+section.update-form h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+}

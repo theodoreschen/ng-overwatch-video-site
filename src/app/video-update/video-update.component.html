@@ -1,63 +1,64 @@
-<nav class="col-sm-3">
-  <app-video-search [videoSearchResults]="videoSearchResults"
-    (videoSelectEvent)="videoSelectHandler($event);">   
-  </app-video-search>
-</nav>
-<section class="col-sm-9" *ngIf="selectedVideo">
-  <h1>Editing {{selectedVideo.video_title}} Data</h1>
-  <form (ngSubmit)="onSubmit();">
-    <p id="video-url">URL: {{selectedVideo.video_url}}</p>
-    <div>
-      <label for="video-title">Title</label>
-      <input id="video-title" [(ngModel)]="selectedVideo.video_title"
-        value="{{selectedVideo.video_title}}" name="video-title"/>
-    </div>
-    <div>
-      <label for="video-hero">Hero</label>
-      <select id="video-hero" [(ngModel)]="selectedVideo.hero" name="video-hero">
-        <option *ngFor="let hero of overwatchHeroes" [value]="hero.normalizedName">
-          {{hero.name}}
-        </option>
-      </select>
-    </div>
-    <div>
-      <label for="video-tags">Tags</label>
-      <ul id="video-tags">
-        <li *ngFor="let tag of selectedVideo.tags; index as idx">
-          <span>{{tag}}</span>
-          <button type="button" (click)="removeTagByIndex(idx);">X</button>
-        </li>
-        <li>
+<div class="row">
+  <nav class="col-sm-5 col-md-4">
+    <app-video-search [videoSearchResults]="videoSearchResults"
+      (videoSelectEvent)="videoSelectHandler($event);">
+    </app-video-search>
+  </nav>
+  <section class="update-form col-sm-7 col-md-8" *ngIf="selectedVideo">
+    <h1>Editing {{selectedVideo.video_title}}</h1>
+    <form (ngSubmit)="onSubmit();">
+      <p id="video-url">URL: {{selectedVideo.video_url}}</p>
+      <div>
+        <label for="video-title">Title</label>
+        <input id="video-title" [(ngModel)]="selectedVideo.video_title"
+          value="{{selectedVideo.video_title}}"
+          name="video-title" />
+      </div>
+      <div>
+        <label for="video-hero">Hero</label>
+        <select id="video-hero" [(ngModel)]="selectedVideo.hero" name="video-hero">
+          <option *ngFor="let hero of overwatchHeroes" [value]="hero.normalizedName">
+            {{hero.name}}
+          </option>
+        </select>
+      </div>
+      <div>
+        <div>
           <label for="video-add-tag">Add New Tag</label>
           <input id="video-add-tag" name="video-add-tag" [(ngModel)]="newTagValue" />
           <button type="button" (click)="addNewTag();">+</button>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <label for="video-date">Date</label>
-      <input type="date" id="video-date" name="video-date"
-        [(ngModel)]="selectedVideo.video_date"/>
-    </div>
-    <div>
-      <label for="video-description">Description</label>
-      <textarea id="video-description" rows="6" cols="50" name="video-description"
-        [(ngModel)]="selectedVideo.description">
+        </div>
+        <div id="video-tags">
+          <span class="video-tag" *ngFor="let tag of selectedVideo.tags; index as idx">
+            <span>{{tag}}</span>
+            <button type="button" (click)="removeTagByIndex(idx);">X</button>
+          </span>
+        </div>
+      </div>
+      <div>
+        <label for="video-date">Date</label>
+        <input type="date" id="video-date" name="video-date" [(ngModel)]="selectedVideo.video_date" />
+      </div>
+      <div>
+        <label for="video-description">Description</label>
+        <textarea id="video-description" rows="6" cols="50" name="video-description"
+          [(ngModel)]="selectedVideo.description">
       </textarea>
-    </div>
-    <div>
-      <label for="video-youtube-iframe">YouTube iframe</label>
-      <textarea id="video-youtube-iframe" name="video-youtube-iframe"
-        rows="5" cols="50" [(ngModel)]="selectedVideo.youtube_iframe">
+      </div>
+      <div>
+        <label for="video-youtube-iframe">YouTube iframe</label>
+        <textarea id="video-youtube-iframe" name="video-youtube-iframe" rows="5" cols="50"
+          [(ngModel)]="selectedVideo.youtube_iframe">
       </textarea>
-    </div>
-    <button type="submit">Update</button>
-  </form>
-  <section id="delete-video">
-    <h1>Delete this video</h1>
-    <div>
-      <span>Be very sure; there's no going back on this</span>
-      <button type="button" (click)="deleteVideo(selectedVideo.video_url);">Delete</button>
-    </div>
+      </div>
+      <button type="submit">Update</button>
+    </form>
+    <section id="delete-video">
+      <h1>Delete this video</h1>
+      <div>
+        <span>Be very sure; there's no going back on this</span>
+        <button type="button" (click)="deleteVideo(selectedVideo.video_url);">Delete</button>
+      </div>
+    </section>
   </section>
-</section>
+</div>
