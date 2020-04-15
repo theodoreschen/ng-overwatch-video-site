@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ng-overwatch-video-site';
+
+  // Bind to the class attribute of the nav-links for CSS styling
 }

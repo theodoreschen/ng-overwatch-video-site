@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoggerService } from '../logger.service';
 import { VideoMetadata, initializeVideoMetadata } from '../video-metadata';
 import { VideoSearchCacheService } from '../video-search-cache.service';
-// import { dummyVideoCache } from '../dummy-video-cache';
+import { dummyVideoCache } from '../dummy-video-cache';
 import { Hero } from '../hero';
 import { OverwatchHeroes } from '../heroes';
 import { VideoService } from '../video.service';
@@ -26,11 +26,13 @@ export class VideoUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.overwatchHeroes = OverwatchHeroes;
     /**Actual Code */
-    this.videoSearchResults = this.videoSearchCache.cachedResults;
+    if (!this.log.develMode) this.videoSearchResults = this.videoSearchCache.cachedResults;
     /**Dummy code so I don't have to keep running queries */
-    // this.videoSearchResults = dummyVideoCache;
-    // this.videoSearchCache.cachedResults = dummyVideoCache;
-    // this.selectedVideo = this.videoSearchResults[0];
+    else {
+      this.videoSearchResults = dummyVideoCache;
+      this.videoSearchCache.cachedResults = dummyVideoCache;
+      this.selectedVideo = this.videoSearchResults[0];
+    }
   }
 
   onSubmit(): void {
@@ -39,7 +41,7 @@ export class VideoUpdateComponent implements OnInit {
       JSON.stringify(this.selectedVideo)
     );
     this.videoService.updateVideo(this.selectedVideo)
-      .subscribe( () => {
+      .subscribe(() => {
         /**Refresh the appropriate entry in this.videoSearchResults
          * and this.videoSearchCache by this.videoSearch.getVideoByUrl()
          */
@@ -48,7 +50,7 @@ export class VideoUpdateComponent implements OnInit {
             /**Should only be one result */
             if (result.length !== 1) {
               this.log.WARN("VideoUpdateComponent.onSubmit", "Multiple results returned when only one was expected");
-              result.forEach( entry => {
+              result.forEach(entry => {
                 this.log.WARN("VideoUpdateComponent.onSubmit", `URL Query fetched result: ${JSON.stringify(entry)}`);
               });
             }

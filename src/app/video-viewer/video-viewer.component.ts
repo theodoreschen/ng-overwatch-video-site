@@ -4,6 +4,7 @@ import { LoggerService } from '../logger.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { VideoService } from '../video.service';
 import { VideoSearchCacheService } from '../video-search-cache.service';
+import { dummyVideoCache } from '../dummy-video-cache';
 
 @Component({
   selector: 'app-video-viewer',
@@ -25,7 +26,12 @@ export class VideoViewerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.videoSearchResults = this.videoSearchCache.cachedResults;
+    if (!this.log.develMode) this.videoSearchResults = this.videoSearchCache.cachedResults;
+    else {
+      this.videoSearchResults = dummyVideoCache;
+      this.videoSearchCache.cachedResults = dummyVideoCache;
+      this.selectedVideo = this.videoSearchResults[0];
+    }
   }
 
   videoSearchByHero (hero: string) {
