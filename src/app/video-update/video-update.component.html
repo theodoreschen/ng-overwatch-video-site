@@ -1,63 +1,84 @@
 <div class="row">
   <nav class="col-sm-5 col-md-4">
-    <app-video-search [videoSearchResults]="videoSearchResults"
-      (videoSelectEvent)="videoSelectHandler($event);">
+    <app-video-search [videoSearchResults]="videoSearchResults" (videoSelectEvent)="videoSelectHandler($event);">
     </app-video-search>
   </nav>
   <section class="update-form col-sm-7 col-md-8" *ngIf="selectedVideo">
     <h1>Editing {{selectedVideo.video_title}}</h1>
     <form (ngSubmit)="onSubmit();">
-      <p id="video-url">URL: {{selectedVideo.video_url}}</p>
-      <div>
-        <label for="video-title">Title</label>
-        <input id="video-title" [(ngModel)]="selectedVideo.video_title"
-          value="{{selectedVideo.video_title}}"
-          name="video-title" />
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">URL</span>
+        </div>
+        <div class="input-group-append">
+          <span class="input-group-text" id="video-url">{{selectedVideo.video_url}}</span>
+        </div>
       </div>
-      <div>
-        <label for="video-hero">Hero</label>
-        <select id="video-hero" [(ngModel)]="selectedVideo.hero" name="video-hero">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="video-title">Title</label>
+        </div>
+        <input class="form-control" id="video-title" [(ngModel)]="selectedVideo.video_title"
+          value="{{selectedVideo.video_title}}" name="video-title" />
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="video-hero">Hero</label>
+        </div>
+        <select class="custom-select" id="video-hero" [(ngModel)]="selectedVideo.hero" name="video-hero">
           <option *ngFor="let hero of overwatchHeroes" [value]="hero.normalizedName">
             {{hero.name}}
           </option>
         </select>
       </div>
-      <div>
-        <div>
-          <label for="video-add-tag">Add New Tag</label>
-          <input id="video-add-tag" name="video-add-tag" [(ngModel)]="newTagValue" />
-          <button type="button" (click)="addNewTag();">+</button>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="video-add-tag">Add Tag</label>
         </div>
-        <div id="video-tags">
-          <span class="video-tag" *ngFor="let tag of selectedVideo.tags; index as idx">
-            <span>{{tag}}</span>
-            <button type="button" (click)="removeTagByIndex(idx);">X</button>
-          </span>
+        <input class="form-control" id="video-add-tag" name="video-add-tag" [(ngModel)]="newTagValue"
+          placeholder="e.g. #poggers" />
+        <button class="input-group-append btn btn-success" type="button" id="add-new-tag"
+          (click)="addNewTag();">+</button>
+      </div>
+      <div id="video-tags">
+        <span class="video-tag" *ngFor="let tag of selectedVideo.tags; index as idx">
+          <span>{{tag}}</span>
+          <button type="button" (click)="removeTagByIndex(idx);">x</button>
+        </span>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="video-date">Date</label>
         </div>
+        <input class="form-control" type="date" id="video-date" name="video-date"
+          [(ngModel)]="selectedVideo.video_date" />
       </div>
-      <div>
-        <label for="video-date">Date</label>
-        <input type="date" id="video-date" name="video-date" [(ngModel)]="selectedVideo.video_date" />
-      </div>
-      <div>
-        <label for="video-description">Description</label>
-        <textarea id="video-description" rows="6" cols="50" name="video-description"
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="video-description">Description</label>
+        </div>
+        <textarea class="form-control" id="video-description" rows="3" cols="50" name="video-description"
           [(ngModel)]="selectedVideo.description">
-      </textarea>
+        </textarea>
       </div>
-      <div>
-        <label for="video-youtube-iframe">YouTube iframe</label>
-        <textarea id="video-youtube-iframe" name="video-youtube-iframe" rows="5" cols="50"
-          [(ngModel)]="selectedVideo.youtube_iframe">
-      </textarea>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="video-youtube-iframe">YouTube iframe</label>
+        </div>
+        <textarea class="form-control" id="video-youtube-iframe" rows="4" cols="50" 
+          name="video-youtube-iframe" [(ngModel)]="selectedVideo.youtube_iframe">
+        </textarea>
       </div>
-      <button type="submit">Update</button>
+      <button class="btn btn-success" type="submit">Update</button>
     </form>
     <section id="delete-video">
       <h1>Delete this video</h1>
       <div>
         <span>Be very sure; there's no going back on this</span>
-        <button type="button" (click)="deleteVideo(selectedVideo.video_url);">Delete</button>
+        <button class="btn btn-danger" type="button"
+          (click)="deleteVideo(selectedVideo.video_url);">
+          Delete
+        </button>
       </div>
     </section>
   </section>
