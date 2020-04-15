@@ -1,9 +1,10 @@
 <div class="row">
-  <nav class="col-sm-4 col-md-3">
-    <app-video-search [videoSearchResults]="videoSearchResults" (videoSelectEvent)="videoSelectHandler($event);">
+  <nav class="col-sm-5 col-md-4">
+    <app-video-search [videoSearchResults]="videoSearchResults"
+      (videoSelectEvent)="videoSelectHandler($event);">
     </app-video-search>
   </nav>
-  <section class="col-sm-8 col-md-9" id="main-video-view" *ngIf="selectedVideo">
+  <section class="col-sm-7 col-md-8" id="main-video-view" *ngIf="selectedVideo">
     <h1>{{selectedVideo.video_title}}</h1>
     <section id="video">
       <div *ngIf="isYoutube">
@@ -16,12 +17,14 @@
       </div>
     </section>
     <section id="video-tags">
-      <ul>
-        <li><a (click)="videoSearchByHero(selectedVideo.hero);">#{{selectedVideo.hero}}</a></li>
-        <li *ngFor="let tag of selectedVideo.tags">
-          <a (click)="videoSearchByTag(tag);">{{tag}}</a>
-        </li>
-      </ul>
+      <span>
+        <a class="video-tag" (click)="videoSearchByHero(selectedVideo.hero);">
+          #{{selectedVideo.hero}}
+        </a>
+      </span>
+      <span *ngFor="let tag of selectedVideo.tags">
+        <a class="video-tag" (click)="videoSearchByTag(tag);">{{tag}}</a>
+      </span>
     </section>
     <section id="video-description" *ngIf="selectedVideo.description">
       <p>{{selectedVideo.description}}</p>

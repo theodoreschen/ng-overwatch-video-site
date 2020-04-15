@@ -3,6 +3,7 @@
   background: #272727;
   height: 100vh;
   padding-left: 10px;
+  padding-right: 10px;
   color: rgb(216, 216, 216);
 }
 
@@ -11,3 +12,38 @@
   font-size: 1.9em;
 }
 
+form {
+  padding-bottom: 20px;
+}
+
+.video-search-results {
+  padding-top: 10px;
+  border-top: 1px solid rgb(216, 216, 216);
+}
+
+ul.video-search-entries {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+ul.video-search-entries > li {
+  margin-bottom: 10px;
+}
+
+ul.video-search-entries > li > a {
+  padding: 5px 10px 5px 10px;
+  background-color: rgb(216, 216, 216);
+  color: #272727;
+  border-radius: 5px;
+}
+
+ul.video-search-entries > li > a:hover {
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px black;
+}
+
+ul.video-search-entries > li > a:active {
+  box-shadow: 0 0 0 black;
+}

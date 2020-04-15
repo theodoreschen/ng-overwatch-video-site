@@ -1,3 +1,38 @@
-[class^="col-sm-"] {
+[class^="col-"] {
   padding: 0px;
+}
+
+#main-video-view {
+  padding-top: 120px;
+  padding-left: 20px;
+}
+
+#main-video-view h1 {
+  font-weight: bolder;
+  padding-left: 20px;
+}
+
+#video-tags {
+  padding-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+a.video-tag {
+  padding: 5px 10px 5px 10px;
+  background-color: #272727;
+  color: rgb(216, 216, 216);
+  border-radius: 10px;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+a.video-tag:hover {
+  cursor: pointer;
+  box-shadow: 3px 3px 3px #272727;
+}
+
+a.video-tag:active {
+  box-shadow: 0px 0px 0px #272727;
 }

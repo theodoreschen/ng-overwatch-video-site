@@ -5,26 +5,29 @@
       <div class="input-group-prepend">
         <span class="input-group-text" for="start-date">Start Date</span>
       </div>
-      <input id="start-date" type="date" [(ngModel)]="startDate" name="start-date" />
+      <input class="form-control" id="start-date" type="date" [(ngModel)]="startDate" name="start-date" />
     </div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" for="end-date">End Date</span>
       </div>
-      <input id="end-date" type="date" [(ngModel)]="endDate" name="end-date" />
+      <input class="form-control" id="end-date" type="date" [(ngModel)]="endDate" name="end-date" />
     </div>
-    <div class="input-group">
-      <label for="hero-select">Hero Name</label>
-      <select id="hero-select" [(ngModel)]="selectedHero" name="hero-select">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="hero-select">Hero Name</label>
+      </div>
+      <select class="custom-select" id="hero-select" [(ngModel)]="selectedHero"
+        name="hero-select">
         <option [value]="null"></option>
         <option *ngFor="let hero of overwatchHeroes" [value]="hero.normalizedName">{{hero.name}}</option>
       </select>
     </div>
-    <button type="submit">Search</button>
+    <button type="submit" class="btn btn-success">Search</button>
   </form>
   <section class="video-search-results" *ngIf="videoSearchResults.length !== 0">
     <h1>Search Results</h1>
-    <ul>
+    <ul class="video-search-entries">
       <li *ngFor="let video of videoSearchResults; let idx = index">
         <a (click)="selectVideo(idx)">{{video.video_title}}</a>
       </li>
