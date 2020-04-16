@@ -59,3 +59,10 @@ span.video-tag button:active {
   background-color: rgb(128, 0, 0);
   box-shadow: none;
 }
+
+div.deleteCard {
+  width: 700px;
+  background-color: #3f3f3f;
+  color: rgb(216, 216, 216);
+  border: 1px solid rgb(216, 216, 216);
+}
