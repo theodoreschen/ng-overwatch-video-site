@@ -2,26 +2,18 @@
   padding: 120px 25vw 20px 25vw;
 }
 
-ul.unformatted {
-  list-style-type: none;
-  padding-left: 20px;
-}
-
-ul.unformatted > li {
-  margin: 15px 0px;
+#video-tags {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 span.video-tag {
   background-color: rgb(216, 216, 216);
   color: #272727;
   font-weight: bold;
-  padding: 10px;
-  padding-left: 20px;
-  padding-right: 10px;
-  /* border: solid 2px black; */
+  padding: 5px 10px 5px 20px;
   border-radius: 20px;
-  margin-right: 10px;
-  margin-top: 50px;
+  margin: 0px 0px 10px 10px;
 }
 
 span.video-tag button {

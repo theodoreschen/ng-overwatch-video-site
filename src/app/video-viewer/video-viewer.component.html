@@ -17,13 +17,13 @@
       </div>
     </section>
     <section id="video-tags">
-      <span>
-        <a class="video-tag" (click)="videoSearchByHero(selectedVideo.hero);">
+      <span class="video-tag">
+        <a (click)="videoSearchByHero(selectedVideo.hero);">
           #{{selectedVideo.hero}}
         </a>
       </span>
-      <span *ngFor="let tag of selectedVideo.tags">
-        <a class="video-tag" (click)="videoSearchByTag(tag);">{{tag}}</a>
+      <span class="video-tag" *ngFor="let tag of selectedVideo.tags">
+        <a (click)="videoSearchByTag(tag);">{{tag}}</a>
       </span>
     </section>
     <section id="video-description" *ngIf="selectedVideo.description">
