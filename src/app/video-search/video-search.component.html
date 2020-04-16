@@ -1,36 +1,39 @@
-<section class="video-search-menu">
-  <h1>Video Search</h1>
-  <form (ngSubmit)="onSubmit();">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" for="start-date">Start Date</span>
+<div class="render-height">
+  <section class="video-search-menu">
+    <h1>Video Search</h1>
+    <form (ngSubmit)="onSubmit();">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="start-date">Start Date</span>
+        </div>
+        <input class="form-control" id="start-date" type="date" [(ngModel)]="startDate" name="start-date" />
       </div>
-      <input class="form-control" id="start-date" type="date" [(ngModel)]="startDate" name="start-date" />
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" for="end-date">End Date</span>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="end-date">End Date</span>
+        </div>
+        <input class="form-control" id="end-date" type="date" [(ngModel)]="endDate" name="end-date" />
       </div>
-      <input class="form-control" id="end-date" type="date" [(ngModel)]="endDate" name="end-date" />
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="hero-select">Hero Name</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="hero-select">Hero Name</label>
+        </div>
+        <select class="custom-select" id="hero-select" [(ngModel)]="selectedHero" name="hero-select">
+          <option [value]="null"></option>
+          <option *ngFor="let hero of overwatchHeroes" [value]="hero.normalizedName">
+            {{hero.name}}
+          </option>
+        </select>
       </div>
-      <select class="custom-select" id="hero-select" [(ngModel)]="selectedHero"
-        name="hero-select">
-        <option [value]="null"></option>
-        <option *ngFor="let hero of overwatchHeroes" [value]="hero.normalizedName">{{hero.name}}</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-success">Search</button>
-  </form>
-  <section class="video-search-results" *ngIf="videoSearchResults.length !== 0">
-    <h1>Search Results</h1>
-    <ul class="video-search-entries">
-      <li *ngFor="let video of videoSearchResults; let idx = index">
-        <a (click)="selectVideo(idx)">{{video.video_title}}</a>
-      </li>
-    </ul>
+      <button type="submit" class="btn btn-success">Search</button>
+    </form>
+    <section class="video-search-results" *ngIf="videoSearchResults.length !== 0">
+      <h1>Search Results</h1>
+      <ul class="video-search-entries">
+        <li *ngFor="let video of videoSearchResults; let idx = index">
+          <a (click)="selectVideo(idx)">{{video.video_title}}</a>
+        </li>
+      </ul>
+    </section>
   </section>
-</section>
+</div>
