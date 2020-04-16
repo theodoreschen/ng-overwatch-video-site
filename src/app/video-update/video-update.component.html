@@ -65,20 +65,34 @@
         <div class="input-group-prepend">
           <label class="input-group-text" for="video-youtube-iframe">YouTube iframe</label>
         </div>
-        <textarea class="form-control" id="video-youtube-iframe" rows="4" cols="50" 
-          name="video-youtube-iframe" [(ngModel)]="selectedVideo.youtube_iframe">
+        <textarea class="form-control" id="video-youtube-iframe" rows="4" cols="50" name="video-youtube-iframe"
+          [(ngModel)]="selectedVideo.youtube_iframe">
         </textarea>
       </div>
       <button class="btn btn-success" type="submit">Update</button>
     </form>
     <section id="delete-video">
-      <h1>Delete this video</h1>
-      <div>
-        <span>Be very sure; there's no going back on this</span>
-        <button class="btn btn-danger" type="button"
-          (click)="deleteVideo(selectedVideo.video_url);">
-          Delete
-        </button>
+      <!-- <h1>Delete this video</h1> -->
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <button class="btn btn-light" (click)="deleteCardIsCollapsed = !deleteCardIsCollapsed" type="button"
+            [attr.aria-expanded]="!deleteCardIsCollapsed" aria-controls="deleteCard">
+            {{deleteCardIsCollapsed? "+" : "-"}}
+          </button>
+        </div>
+        <div class="input-group-append">
+          <span class="input-group-text">Delete this video</span>
+        </div>
+      </div>
+      <div id="deleteCard" [ngbCollapse]="deleteCardIsCollapsed">
+        <div class="card deleteCard">
+          <div class="card-body">
+            <p>Are you sure? There's no going back on this...</p>
+            <button class="btn btn-danger" type="button" (click)="deleteVideo(selectedVideo.video_url);">
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   </section>

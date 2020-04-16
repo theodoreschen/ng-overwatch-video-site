@@ -16,6 +16,7 @@ export class VideoUpdateComponent implements OnInit {
   overwatchHeroes: Hero[];
   selectedVideo: VideoMetadata;
   videoSearchResults: VideoMetadata[];
+  deleteCardIsCollapsed: boolean;
 
   constructor(
     private log: LoggerService,
@@ -24,6 +25,7 @@ export class VideoUpdateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.deleteCardIsCollapsed = true;
     this.overwatchHeroes = OverwatchHeroes;
     /**Actual Code */
     if (!this.log.develMode) this.videoSearchResults = this.videoSearchCache.cachedResults;
@@ -98,6 +100,7 @@ export class VideoUpdateComponent implements OnInit {
       idx = this.videoSearchCache.cachedResults.findIndex(value => value.video_url === this.selectedVideo.video_url);
       this.videoSearchCache.cachedResults.splice(idx, 1);
       this.selectedVideo = initializeVideoMetadata();
+      this.deleteCardIsCollapsed = true;
     });
   }
 }

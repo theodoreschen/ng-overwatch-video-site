@@ -11,6 +11,8 @@ import { VideoAddComponent } from './video-add/video-add.component';
 import { VideoSearchComponent } from './video-search/video-search.component';
 import { LoggerWidgetComponent } from './logger-widget/logger-widget.component';
 
+import { NgbCollapseModule, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,9 @@ import { LoggerWidgetComponent } from './logger-widget/logger-widget.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbCollapseModule,
+    NgbPopoverModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

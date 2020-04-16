@@ -3,40 +3,44 @@
   <form (ngSubmit)="onSubmit()" #OwHeroForm="ngForm">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="db-form-video-iframe">HTML iframe</label>
+        <button type="button" class="btn btn-secondary" for="db-form-video-iframe"
+          ngbPopover="Generated embed <iframe /> code from YouTube to insert video players" [openDelay]="300"
+          [closeDelay]="500" triggers="mouseenter:mouseleave">
+          HTML iframe
+        </button>
       </div>
       <textarea class="form-control" id="db-form-video-iframe" rows="5" cols="50" required name="db-form-video-iframe"
         [(ngModel)]="videoEntry.youtube_iframe" (blur)="htmlIframeOnBlur()">
       </textarea>
     </div>
-    <p class="hint">
-      Generated embed &lt;iframe /&gt; code from YouTube/Vimeo to insert
-      YouTube/Vimeo video players.
-    </p>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="db-form-video-url">Video URL</label>
+        <button type="button" class="btn btn-secondary" for="db-form-video-url" ngbPopover='Website (YouTube/Vimeo) URL of video. Hint: grab the URL 
+          in the "src" attribute in the HTML iframe.' [openDelay]="300" [closeDelay]="500"
+          triggers="mouseenter:mouseleave">
+          Video URL
+        </button>
       </div>
       <input class="form-control" id="db-form-video-url" required name="db-form-video-url"
         [(ngModel)]="videoEntry.video_url" />
     </div>
-    <p class="hint">
-      Website (YouTube/Vimeo) URL of video. Hint: grab the URL in the
-      "src" attribute in the HTML iframe.
-    </p>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="db-form-video-date">Video Date</label>
+        <button type="button" class="btn btn-secondary" for="db-form-video-date" ngbPopover="Date video was created"
+          [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave">
+          Video Date
+        </button>
       </div>
       <input class="form-control" type="date" id="db-form-video-date" name="db-form-video-date"
         [(ngModel)]="videoEntry.video_date" required />
     </div>
-    <p class="hint">
-      Date video was created
-    </p>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="db-form-hero-name">Hero Name</label>
+        <button type="button" class="btn btn-secondary" for="db-form-hero-name"
+          ngbPopover="Select hero of the video clip" [openDelay]="300" [closeDelay]="500"
+          triggers="mouseenter:mouseleave">
+          Hero Name
+        </button>
       </div>
       <select class="custom-select" id="db-form-hero-name" name="db-form-hero-name" [(ngModel)]="videoEntry.hero"
         required>
@@ -47,30 +51,36 @@
     </div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="db-form-video-title">Alternate Title</label>
+        <button type="button" class="btn btn-secondary" for="db-form-video-title"
+          ngbPopover='Alternate title for video to display. Default:
+          <hero name>_<video date>' [openDelay]="300" [closeDelay]="500"
+          triggers="mouseenter:mouseleave">
+          Alternate Title
+        </button>
       </div>
       <input class="form-control" id="db-form-video-title" name="db-form-video-title"
         [(ngModel)]="videoEntry.video_title" />
     </div>
-    <p class="hint">
-      Alternate title for video to display. Default:
-      <code>&lt;hero name&gt;_&lt;video date&gt;</code>
-    </p>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="db-form-clip-type">Clip Type</label>
+        <button type="button" class="btn btn-secondary" for="db-form-clip-type"
+          ngbPopover='Choose between "Highlight" or "PotG". Default: Highlight'
+          [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave">
+          Clip Type
+      </button>
       </div>
       <select class="custom-select" id="db-form-clip-type" name="db-form-clip-type" [(ngModel)]="videoEntry.type">
         <option value="highlight">Highlight</option>
         <option value="potg">PotG</option>
       </select>
     </div>
-    <p class="hint">
-      Choose between "Highlight" or "PotG". Default: Highlight
-    </p>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="db-form-tags">Tags</label>
+        <button type="button" class="btn btn-secondary" for="db-form-tags"
+          ngbPopover="Add tags to the video for cross-referencing" [openDelay]="300" [closeDelay]="500"
+          triggers="mouseenter:mouseleave">
+          Tags
+        </button>
       </div>
       <input class="form-control" id="db-form-tags" name="db-form-tags" [(ngModel)]="newTagValue" />
       <div class="input-group-append">
@@ -87,16 +97,18 @@
         </li>
       </ul>
     </div>
-    <p class="hint">Add tags to the video for cross-referencing</p>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="db-form-description">Description</label>
+        <button type="button" class="btn btn-secondary" for="db-form-description"
+          ngbPopover="Personal commentary, if desired" [openDelay]="300" [closeDelay]="500"
+          triggers="mouseenter:mouseleave">
+          Description
+        </button>
       </div>
-      <textarea class="form-control" id="db-form-description" rows="3" cols="50" 
-        name="db-form-description" [(ngModel)]="videoEntry.description">
-      </textarea>  
+      <textarea class="form-control" id="db-form-description" rows="3" cols="50" name="db-form-description"
+        [(ngModel)]="videoEntry.description">
+      </textarea>
     </div>
-    <p class="hint">Personal commentary, if desired</p>
     <div>
       <button class="btn btn-success" type=submit [disabled]="OwHeroForm.form.invalid">Submit</button>
       <button class="btn btn-danger" type="button" (click)="clearForm();">Clear</button>
