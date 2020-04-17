@@ -24,7 +24,9 @@ div.input-group {
 }
 
 #video-tags {
-  margin: 0px 0px 15px 10px;
+  width: 700px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 span.video-tag {
@@ -36,8 +38,8 @@ span.video-tag {
   padding-right: 10px;
   /* border: solid 2px black; */
   border-radius: 20px;
-  margin-right: 10px;
-  margin-top: 50px;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 
 span.video-tag button {

@@ -51,10 +51,8 @@
     </div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <button type="button" class="btn btn-secondary" for="db-form-video-title"
-          ngbPopover='Alternate title for video to display. Default:
-          <hero name>_<video date>' [openDelay]="300" [closeDelay]="500"
-          triggers="mouseenter:mouseleave">
+        <button type="button" class="btn btn-secondary" for="db-form-video-title" ngbPopover='Alternate title for video to display. Default:
+          <hero name>_<video date>' [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave">
           Alternate Title
         </button>
       </div>
@@ -64,10 +62,10 @@
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <button type="button" class="btn btn-secondary" for="db-form-clip-type"
-          ngbPopover='Choose between "Highlight" or "PotG". Default: Highlight'
-          [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave">
+          ngbPopover='Choose between "Highlight" or "PotG". Default: Highlight' [openDelay]="300" [closeDelay]="500"
+          triggers="mouseenter:mouseleave">
           Clip Type
-      </button>
+        </button>
       </div>
       <select class="custom-select" id="db-form-clip-type" name="db-form-clip-type" [(ngModel)]="videoEntry.type">
         <option value="highlight">Highlight</option>
@@ -88,14 +86,10 @@
       </div>
     </div>
     <div id="video-tags">
-      <ul class="unformatted">
-        <li *ngFor="let tag of videoEntry.tags; index as idx">
-          <span class="video-tag">
-            <span>{{tag}}</span>
-            <button type="button" (click)="removeTag(idx);">x</button>
-          </span>
-        </li>
-      </ul>
+      <span class="video-tag" *ngFor="let tag of videoEntry.tags; index as idx">
+        <span>{{tag}}</span>
+        <button type="button" (click)="removeTag(idx);">x</button>
+      </span>
     </div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">

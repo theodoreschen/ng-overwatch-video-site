@@ -13,6 +13,7 @@ import { VideoService } from '../video.service';
   styleUrls: ['./video-update.component.css']
 })
 export class VideoUpdateComponent implements OnInit {
+  newTagValue: string;
   overwatchHeroes: Hero[];
   selectedVideo: VideoMetadata;
   videoSearchResults: VideoMetadata[];
@@ -74,7 +75,6 @@ export class VideoUpdateComponent implements OnInit {
     this.selectedVideo.tags.splice(index, 1);
   }
 
-  newTagValue: string;
   addNewTag(): void {
     if (!this.newTagValue.startsWith("#")) this.newTagValue = `#${this.newTagValue}`;
     if (this.selectedVideo.tags.findIndex(value => value === this.newTagValue) === -1) {
