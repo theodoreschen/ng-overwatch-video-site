@@ -4,7 +4,13 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+  branches:
+    include:
+    - master
+    - releases/*
+    exclude:
+    - bugfix/*
+    - feature/*    
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -20,3 +26,12 @@ steps:
     npm install
     ng build --prod
   displayName: 'npm install and build'
+
+- script: |
+    ng test --browsers=FirefoxHeadless --no-watch --code-coverage --reporters=junit
+  displayName: 'npm run test'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/test-results.xml'
