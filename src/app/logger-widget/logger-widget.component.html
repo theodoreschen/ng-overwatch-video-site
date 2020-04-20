@@ -1,5 +1,9 @@
-<label for="log-level-setter">Log Level</label>
-<select id="log-level-setter" [ngModel]="selectedLevel" name="log-level-setter"
-   (ngModelChange)="setGlobalLogLevel($event)">
-  <option *ngFor="let level of levels" [value]="level.value">{{level.name}}</option>
-</select>
+<div class="input-group mb-3 logger-widget">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="log-level-setter">Log Level</label>
+  </div>
+  <select id="log-level-setter" [ngModel]="selectedLevel" name="log-level-setter"
+    class="custom-select" (ngModelChange)="setGlobalLogLevel($event)">
+    <option *ngFor="let level of levels" [value]="level.value">{{level.name}}</option>
+  </select>
+</div>
