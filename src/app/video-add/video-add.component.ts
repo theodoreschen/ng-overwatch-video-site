@@ -26,7 +26,7 @@ export class VideoAddComponent implements OnInit {
   }
 
   htmlIframeOnBlur(): void {
-    if ((this.videoEntry.video_title === null) && (this.videoEntry.youtube_iframe !== null)) {
+    if ((this.videoEntry.video_url === null) && (this.videoEntry.youtube_iframe !== null)) {
       let found = this.videoEntry.youtube_iframe.match(/src=\"[:\/\.\-\_\w]+\"/);
       if (found.length !== 0) {
         // we only want URL, so trim 'src="' and the trailing '"'
