@@ -12,6 +12,7 @@ import { VideoSearchComponent } from './video-search/video-search.component';
 import { LoggerWidgetComponent } from './logger-widget/logger-widget.component';
 
 import { NgbCollapseModule, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NgbCollapseModule, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap'
     VideoAddComponent,
     VideoSearchComponent,
     LoggerWidgetComponent,
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,

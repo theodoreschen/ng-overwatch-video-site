@@ -1,15 +1,1 @@
-<div class="container-fluid">
-  <nav class="nav">
-    <a href="https://iconscout.com/icons/overwatch" target="_blank">
-      <img id="overwatch-icon" src="/assets/img/Overwatch-color.svg" alt="Overwatch Icon" />
-    </a>
-    <a class="nav-link" [routerLink]="['/video-viewer']">Video</a>
-    <a class="nav-link" [routerLink]="['/video-update']">Update</a>
-    <a class="nav-link" [routerLink]="['/video-add']">Add</a>
-    <app-logger-widget *ngIf="debugEnabled"></app-logger-widget>
-  </nav>
-  <router-outlet></router-outlet>
-  <!-- <div>
-    <a href="https://iconscout.com/icons/overwatch" target="_blank">Overwatch Icon</a> by <a href="https://iconscout.com/contributors/icons8" target="_blank">Icons8</a>
-  </div> -->
-</div>
+<app-navigation></app-navigation>

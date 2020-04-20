@@ -1,0 +1,45 @@
+div.container-fluid {
+  /* margin: 0px; */
+  /* padding: 0px; */
+  width: 100%;
+}
+
+.active-link {
+  font-weight: bolder;
+}
+
+nav.nav {
+  margin-left: -15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: center;
+  background-color: #b6b6b6;
+  border-bottom: solid 1px black;
+  box-shadow: 0px 5px 5px black;
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}
+
+nav.nav a.nav-link {
+  font-size: 1.3em;
+  color: black;
+  border-radius: 5px;
+}
+
+nav.nav a.nav-link:hover {
+  font-weight: bold;
+  background-color: #464646;
+  color: #ff8800;
+  box-shadow: 2px 2px 2px black;
+}
+
+nav.nav a.nav-link:active {
+  box-shadow: 0px 0px 0px black;
+}
+
+#overwatch-icon {
+  width: 75px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
