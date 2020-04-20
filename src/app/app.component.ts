@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoggerService } from './logger.service';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ng-overwatch-video-site';
+  debugEnabled: boolean;
+
+  constructor(private logService: LoggerService) { }
+
+  ngOnInit() {
+    this.debugEnabled = this.logService.develMode;
+  }
 
   // Bind to the class attribute of the nav-links for CSS styling
 }

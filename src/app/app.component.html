@@ -6,7 +6,7 @@
     <a class="nav-link" [routerLink]="['/video-viewer']">Video</a>
     <a class="nav-link" [routerLink]="['/video-update']">Update</a>
     <a class="nav-link" [routerLink]="['/video-add']">Add</a>
-    <!-- <app-logger-widget></app-logger-widget> -->
+    <app-logger-widget *ngIf="debugEnabled"></app-logger-widget>
   </nav>
   <router-outlet></router-outlet>
   <!-- <div>
