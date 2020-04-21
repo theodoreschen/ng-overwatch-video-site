@@ -27,11 +27,11 @@ export class VideoSearchComponent implements OnInit {
     private videoSearchCache: VideoSearchCacheService
   ) { }
 
-  ngOnInit (): void {
+  ngOnInit(): void {
     this.videoSearchResults = this.videoSearchCache.cachedResults;
   }
 
-  onSubmit (): void {
+  onSubmit(): void {
     this.log.DEBUG(
       "VideoSearchComponent.onSubmit",
       `hero: ${this.selectedHero}; start date: ${this.startDate}; end date: ${this.endDate}`
@@ -43,8 +43,8 @@ export class VideoSearchComponent implements OnInit {
       });
   }
 
-  selectVideo (idx: number) {
+  selectVideo(idx: number) {
     this.log.DEBUG("VideoSearchComponent.selectVideo", `index ${idx} selected`);
     this.videoSelectEvent.emit(this.videoSearchResults[idx]);
-  } 
+  }
 }
