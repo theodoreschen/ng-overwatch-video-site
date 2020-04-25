@@ -1,16 +1,22 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { VideoService } from './video.service';
 
-describe('VideoSearchService', () => {
+describe('VideoService', () => {
+  let httpTestingController: HttpTestingController;
   let service: VideoService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+    });
+
+    httpTestingController = TestBed.get(HttpTestingController);
     service = TestBed.inject(VideoService);
   });
 
-  xit('should be created', () => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 });

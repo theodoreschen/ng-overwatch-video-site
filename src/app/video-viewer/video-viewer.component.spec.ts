@@ -1,14 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VideoViewerComponent } from './video-viewer.component';
+import { VideoService } from '../video.service';
 
 describe('VideoViewerComponent', () => {
+  let mockVideo: VideoService;
   let component: VideoViewerComponent;
   let fixture: ComponentFixture<VideoViewerComponent>;
 
   beforeEach(async(() => {
+    mockVideo = jasmine.createSpyObj(["getVideosBySearch", "getVideosByTag"]);
+
     TestBed.configureTestingModule({
-      declarations: [ VideoViewerComponent ]
+      declarations: [ VideoViewerComponent ],
+      providers: [
+        { provide: VideoService, useValue: mockVideo }
+      ],
     })
     .compileComponents();
   }));
@@ -19,7 +26,7 @@ describe('VideoViewerComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
